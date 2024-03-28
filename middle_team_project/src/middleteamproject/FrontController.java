@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import middleteamproject.controller.Controller;
+import middleteamproject.controller.GameAvoidBallController;
 import middleteamproject.controller.LogOutController;
 import middleteamproject.controller.MemberCheckController;
 import middleteamproject.controller.MemberJoinController;
@@ -106,6 +107,8 @@ public class FrontController extends HttpServlet {
 			methodRedirect(request, response, nowUri);
 
 		} else if (com.equals("/game_avoidBall")) {
+			controller = new GameAvoidBallController();
+			viewPage = controller.process(request, response);
 			nowUri = com;
 			viewPage =nowUri+".jsp";
 			methodForward(request, response, viewPage);

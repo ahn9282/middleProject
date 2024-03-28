@@ -8,7 +8,7 @@ import middleteamproject.dao.MemberDAO;
 public class MembersaveController implements Controller{
 
 	@Override
-	public String process(HttpServletRequest request, HttpServletResponse reponse) {
+	public String process(HttpServletRequest request, HttpServletResponse response) {
 	 String userId = request.getParameter("userID");
 	 String userPw = request.getParameter("userPW");
 	 String name = request.getParameter("youname");

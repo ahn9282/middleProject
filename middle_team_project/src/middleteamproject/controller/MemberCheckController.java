@@ -10,7 +10,7 @@ import middleteamproject.dto.MemberDTO;
 public class MemberCheckController implements Controller{
 
 	@Override
-	public String process(HttpServletRequest request, HttpServletResponse reponse) {
+	public String process(HttpServletRequest request, HttpServletResponse response) {
 	 String userId = request.getParameter("loginID");
 	 String userPw = request.getParameter("loginPW");
 	
@@ -29,6 +29,7 @@ public class MemberCheckController implements Controller{
 		request.setAttribute("FoundInfo",true );
 		HttpSession session = request.getSession();
 		session.setAttribute("username", checkMember.getUserName());
+		session.setAttribute("userId", checkMember.getUserId());
 		return "/";
 		
 	}

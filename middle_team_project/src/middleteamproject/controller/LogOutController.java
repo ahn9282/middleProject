@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 public class LogOutController implements Controller{
 
 	@Override
-	public String process(HttpServletRequest request, HttpServletResponse reponse) {
+	public String process(HttpServletRequest request, HttpServletResponse response) {
 	 
 		HttpSession session = request.getSession(false);
 		if (session != null) {

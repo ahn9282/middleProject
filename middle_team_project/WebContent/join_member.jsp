@@ -172,9 +172,9 @@
 						<p class="mb-0">닉네임 :</p>
 						<input class="w-100 mx-auto p-3" type="text" name="youname"
 							value="" style="border-radius: 5px;" id="joinNAME">
-						<p class="mb-0">ID :${validId}</p>
+						<p class="mb-0">ID :</p>
 						<input class="w-100 mx-auto p-3" type="text" name="userID"
-							value="" style="border-radius: 5px;" id="joinID">
+							value="${validId}" style="border-radius: 5px;" id="joinID">
 							
 						<p class="mb-0">비밀번호 :</p>
 						<input class="w-100 mx-auto p-3" type="password" name="userPW"

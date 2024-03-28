@@ -5,6 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface Controller {
 	
-	public String process(HttpServletRequest request, HttpServletResponse reponse);
+	public String process(HttpServletRequest request, HttpServletResponse response);
 		
 }
