@@ -12,6 +12,7 @@ public class MembersaveController implements Controller{
 	 String userId = request.getParameter("userID");
 	 String userPw = request.getParameter("userPW");
 	 String name = request.getParameter("youname");
+	 System.out.println("userId : " + userId);
 	 
 	 MemberDAO joinMember = new MemberDAO();
 	 joinMember.saveMember(userId, userPw, name);

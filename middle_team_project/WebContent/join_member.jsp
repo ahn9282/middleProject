@@ -157,32 +157,35 @@
 					id="join_container"
 					style="width: 80%; min-width: 800px; height: 100%">
 					<div class="card-header w-100">
-						<h2>회원 가입</h2>
+						<h2>회원 가입: 아이디 조회는 필수적으로 해주세요</h2>
 					</div>
 					<div class="card-body p-3 w-100">
-						<p class="mb-0">닉네임 :</p>
-						<input class="w-100 mx-auto p-3" type="text" name="youname"
-							value="" style="border-radius: 5px;" id="joinNAME">
-						<p class="mb-0">ID :</p>
 							<form onsubmit="return CheckID()" action="${pageContext.request.contextPath }/join_member" method="post">
 						<div class="d-flex flex-row">
-						<input class="w-100 mx-auto p-3" type="text" name="userID"
-							value="${validId}" style="border-radius: 5px;" id="joinID">
+						<p>id 조회</p>
+						<input type="text" name="showID" value="${validId}" id="veritifyID">
 							<button type="submit" class="btn btn-primary" id="researchId">조회</button>
 						</div>
 							</form>
+			<form action="${pageContext.request.contextPath }/save_member"
+				name="joinForm" method="post" onsubmit="return Checkform()">
+						<p class="mb-0">닉네임 :</p>
+						<input class="w-100 mx-auto p-3" type="text" name="youname"
+							value="" style="border-radius: 5px;" id="joinNAME">
+						<p class="mb-0">ID :${validId}</p>
+						<input class="w-100 mx-auto p-3" type="text" name="userID"
+							value="" style="border-radius: 5px;" id="joinID">
+							
 						<p class="mb-0">비밀번호 :</p>
 						<input class="w-100 mx-auto p-3" type="password" name="userPW"
 							value="" style="border-radius: 5px;" id="joinPW">
-					</div>
-			<form action="${pageContext.request.contextPath }/save_member"
-				name="joinForm" method="post" onsubmit="return Checkform()">
 					<div class="card-footer w-100 d-flex flex:row jusitfy-content-center">
 						<button class="btn btn-primary me-auto" type="submit" id="joinBtn">가입</button>
 						<a class="btn btn-secondary" id="closebtn"
 							href="${pageContext.request.contextPath }">취소</a>
 					</div>
 			</form>
+					</div>
 				</div>
 			<script>
 				function Checkform() {
@@ -231,7 +234,7 @@
 				}
 				
 				function CheckID() {
-					let userID = document.getElementById("joinID");
+					let userID = document.getElementById("veritifyID");
 					if (userID.value === "") {
 						userID.focus();
 						alert("ID를 입력후 조회하여 주세요.");
@@ -249,7 +252,7 @@
 			</script>
 		</div>
 		<script>
-		let userID = document.getElementById("joinID");
+		let userID = document.getElementById("veritifyID");
 		if(${existingId} == true){
 			alert("중복되는 아이디 입니다.");
 			existId="";

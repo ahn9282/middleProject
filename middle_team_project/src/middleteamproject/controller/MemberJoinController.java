@@ -12,7 +12,7 @@ public class MemberJoinController implements Controller {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse reponse) {
 
-		String joinId = request.getParameter("userID");
+		String joinId = request.getParameter("showID");
 
 		MemberDAO dao = new MemberDAO();
 		List<String> list = dao.listID();
