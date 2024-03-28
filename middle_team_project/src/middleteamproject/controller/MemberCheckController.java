@@ -13,25 +13,23 @@ public class MemberCheckController implements Controller{
 	public String process(HttpServletRequest request, HttpServletResponse reponse) {
 	 String userId = request.getParameter("loginID");
 	 String userPw = request.getParameter("loginPW");
-	 System.out.println("입력 ID : "+userId);
-	 System.out.println("입력 PW : " + userPw);
+	
 	 
 	 
 	 MemberDAO loginMember = new MemberDAO();
 	 MemberDTO checkMember = loginMember.findMember(userId,userPw);
 	if(checkMember.getUserId()==null) {
-		System.out.println("로그인 정보 틀림");
-		request.setAttribute("notFoundInfo",true );
-		return "";
+		
+		request.setAttribute("FoundInfo",false );
+		return "/";
 		
 	}else {
-		System.out.println("로그인 정보 맞음");
-		System.out.println("로그인한 ㅁ메버의 Id : " + checkMember.getUserId());
+		
 		request.setAttribute("member",checkMember );
-		request.setAttribute("notFoundInfo",false );
+		request.setAttribute("FoundInfo",true );
 		HttpSession session = request.getSession();
 		session.setAttribute("username", checkMember.getUserName());
-		return "";
+		return "/";
 		
 	}
 	}

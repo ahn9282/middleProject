@@ -61,39 +61,68 @@ public class FrontController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String viewPage = null;
 		Controller controller = null;
+		String nowUri = "";
 
 		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
 		String com = uri.substring(conPath.length());
+		
 		System.out.println("uri : " + uri);
 		System.out.println("conPath : " + conPath);
 		System.out.println("com : " + com);
 
-		if (com.equals("")) {
+		if (com.equals("/")) {
 			System.out.println("index.jsp");
 			viewPage = "index.jsp";
+			nowUri=com;
+			methodForward(request, response, viewPage);
 
 		} else if (com.equals("/join_member")) {
+
+			
 			viewPage = "/join_member.jsp";
+			methodForward(request, response, viewPage);
 
 		} else if (com.equals("/save_member")) {
-			System.out.println("저장 완료");
+			
 			controller = new MembersaveController();
 			viewPage = controller.process(request, response);
+			
+			methodRedirect(request, response, viewPage);
 
 		} else if (com.equals("/check_member")) {
 			controller = new MemberCheckController();
 			viewPage = controller.process(request, response);
-
+			methodForward(request, response, nowUri);
+			
 		} else if (com.equals("/logout")) {
 			controller = new LogOutController();
 			viewPage = controller.process(request, response);
+			methodRedirect(request, response, nowUri);
+
 
 		}
 
+	}
+
+	protected void methodForward(HttpServletRequest request, HttpServletResponse response, String viewPage) {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 
-		dispatcher.forward(request, response);
+		try {
+			dispatcher.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	protected void methodRedirect(HttpServletRequest request, HttpServletResponse response, String viewPage) {
+		String redirectUri = "/middle_team_project" + viewPage;
+		try {
+			response.sendRedirect(redirectUri);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

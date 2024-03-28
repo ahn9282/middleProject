@@ -15,7 +15,7 @@ public class MembersaveController implements Controller{
 	 
 	 MemberDAO joinMember = new MemberDAO();
 	 joinMember.saveMember(userId, userPw, name);
-	 return "";
+	 return "/";
 	}
 
 }

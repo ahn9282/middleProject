@@ -74,7 +74,9 @@
   String username= (String)session.getAttribute("username");
   %>
   <hedear class="d-flex flex-column">
-    <a id="home" class="d-flex flex-column justify-content-center align-items-center" href="/middle_team_project/">웹게임천국</a>
+  <form action="${pageContext.request.contextPath}/" method="post">
+    <button id="home" class="d-flex flex-column justify-content-center align-items-center" >웹게임천국</button>
+  </form>
     <nav class="navbar navbar-expand-lg bg-body" data-bs-theme="dark">
       <div class="container-fluid">
 
@@ -214,12 +216,14 @@
     	}
    
     let loginCheck = "";
-    	loginCheck = ${notFoundInfo};
-    if(loginCheck==true){
+    	loginCheck = ${FoundInfo};
+    	console.log(loginCheck);
+    if(loginCheck==false){
+    	
     	alert("로그인 정보가 틀렸습니다.");
     	loginCheck = "";
     }
-    if(loginCheck==false){
+    if(loginCheck==true){
     	alert("환영합니다!");
     	loginCheck = "";
     	}
