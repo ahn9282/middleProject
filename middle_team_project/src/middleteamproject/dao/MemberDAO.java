@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -13,7 +15,8 @@ import middleteamproject.dto.MemberDTO;
 
 public class MemberDAO {
 	private DataSource dataSource = null;
-
+	
+	
 	public MemberDAO() {
 		try {
 			Context context = new InitialContext();
@@ -96,5 +99,42 @@ public class MemberDAO {
 			}
 		}
 		return dto;
+	}
+	public List<String> listID() {
+		List<String>idList = new ArrayList<>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = " select member_id from member";
+		MemberDTO dto = new MemberDTO();
+		try {
+
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+			
+				String memberId = rs.getString("member_id");
+				idList.add(memberId);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return idList;
 	}
 }
