@@ -193,6 +193,8 @@
         modalOff();
 
     }, true)
+    
+    
     </script>
     <script>
     
@@ -211,7 +213,11 @@
 				return false;
 			}
 
-			
+			window.addEventListener('keydown', e => {
+			      if (modal.style.display === "flex"&& e.keyCode == 13){
+			    	  
+			      }
+			    })
 			return true;
     	}
    
