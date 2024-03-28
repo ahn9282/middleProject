@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 
 import middleteamproject.controller.Controller;
 import middleteamproject.controller.LogOutController;
@@ -21,7 +21,7 @@ import middleteamproject.controller.MembersaveController;
 @WebServlet("/")
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	static String nowUri;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -61,12 +61,12 @@ public class FrontController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String viewPage = null;
 		Controller controller = null;
-		String nowUri = "";
+		
 
 		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
 		String com = uri.substring(conPath.length());
-		
+
 		System.out.println("uri : " + uri);
 		System.out.println("conPath : " + conPath);
 		System.out.println("com : " + com);
@@ -74,32 +74,36 @@ public class FrontController extends HttpServlet {
 		if (com.equals("/")) {
 			System.out.println("index.jsp");
 			viewPage = "index.jsp";
-			nowUri=com;
+			nowUri = com;
 			methodForward(request, response, viewPage);
 
 		} else if (com.equals("/join_member")) {
 
-			
 			viewPage = "/join_member.jsp";
 			methodForward(request, response, viewPage);
 
 		} else if (com.equals("/save_member")) {
-			
+
 			controller = new MembersaveController();
 			viewPage = controller.process(request, response);
-			
+
 			methodRedirect(request, response, viewPage);
 
 		} else if (com.equals("/check_member")) {
 			controller = new MemberCheckController();
 			viewPage = controller.process(request, response);
 			methodForward(request, response, nowUri);
-			
+
 		} else if (com.equals("/logout")) {
 			controller = new LogOutController();
+			System.out.println(" nowUri : " + nowUri);
 			viewPage = controller.process(request, response);
 			methodRedirect(request, response, nowUri);
 
+		} else if (com.equals("/game_avoidBall")) {
+			nowUri = com;
+			viewPage =nowUri+".jsp";
+			methodForward(request, response, viewPage);
 
 		}
 
