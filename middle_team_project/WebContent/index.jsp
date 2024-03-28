@@ -101,21 +101,23 @@
                 href="${pageContext.request.contextPath }/board">게시판</a>
             </li>
           </ul>
+            <span id="time" class="text-white m-2 p-0" style="min-width:100px"></span>
+            <div id="dashboard" class="d-flex flex-row justify-content-center align-items-center">
           <% if(username == null){ %>
           <div id="none-login">
           <span class="d-flex" role="search">
-            <span id="time" class="text-white m-2 p-0" style="min-width:100px"></span>
             <button class="btn btn-outline-info" id="signBtn" type="submit">sign</button>        
           </span>
           </div>
           <%}else{ %>
-          <div id="on-login" class="">
-          <p class="text-white" id="showUserName">user:<%=username %></p>
           <form action="${pageContext.request.contextPath }/logout" method="get">
+          <div id="on-login d-flex flex-row" class="">
+          <p class="text-white" id="showUserName">user:<%=username %></p>
           <button class="btn btn-info" id="logoutBtn" type="submit">logout</button>   
-          </form>
           </div>
+          </form>
           <%} %>
+            </div>
           
         </div>
       </div>
@@ -210,8 +212,7 @@
 			
 			return true;
     	}
-    
-
+   
     let loginCheck = "";
     	loginCheck = ${notFoundInfo};
     if(loginCheck==true){
