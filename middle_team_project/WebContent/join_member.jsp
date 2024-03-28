@@ -67,6 +67,8 @@
 	top: 12px;
 	left: 250px;
 }
+
+
 </style>
 </head>
 
@@ -145,12 +147,10 @@
 		</div>
 	</div>
 
-	<main>
-		<div class="border w-100 d-flex justify-content-center"
+	<main class="d-flex flex-column align-items-center">
+		<div class="w-50 d-flex justify-content-center"
 			style="height: 500px">
 
-			<form action="${pageContext.request.contextPath }/save_member"
-				name="joinForm" method="post" onsubmit="return Checkform()">
 
 				<div
 					class="card card-border d-flex flex-column justify-content-center"
@@ -164,20 +164,26 @@
 						<input class="w-100 mx-auto p-3" type="text" name="youname"
 							value="" style="border-radius: 5px;" id="joinNAME">
 						<p class="mb-0">ID :</p>
+							<form onsubmit="return CheckID()" action="${pageContext.request.contextPath }/join_member" method="post">
+						<div class="d-flex flex-row">
 						<input class="w-100 mx-auto p-3" type="text" name="userID"
 							value="" style="border-radius: 5px;" id="joinID">
+							<button type="submit" class="btn btn-primary" id="researchId">조회</button>
+						</div>
+							</form>
 						<p class="mb-0">비밀번호 :</p>
 						<input class="w-100 mx-auto p-3" type="password" name="userPW"
 							value="" style="border-radius: 5px;" id="joinPW">
 					</div>
-					<div
-						class="card-footer w-100 d-flex flex:row jusitfy-content-center">
+			<form action="${pageContext.request.contextPath }/save_member"
+				name="joinForm" method="post" onsubmit="return Checkform()">
+					<div class="card-footer w-100 d-flex flex:row jusitfy-content-center">
 						<button class="btn btn-primary me-auto" type="submit" id="joinBtn">가입</button>
 						<a class="btn btn-secondary" id="closebtn"
 							href="${pageContext.request.contextPath }">취소</a>
 					</div>
-				</div>
 			</form>
+				</div>
 			<script>
 				function Checkform() {
 					let userName = document.getElementById("joinNAME");
@@ -187,6 +193,11 @@
 					if (userName.value === "") {
 						userName.focus();
 						alert("닉네임을 입력해 주세요.");
+						return false;
+					}else if(userName.value.length >=20){
+						userName.focus();
+						alert("닉네임의 길이는 20글자가 최대 입니다.");
+						userName.value="";
 						return false;
 					}
 					if (userID.value.length <6) {
@@ -198,18 +209,51 @@
 						userID.focus();
 						alert("ID를 입력해 주세요.");
 						return false;
+					}else if(userID.value.length >=50){
+						userID.focus();
+						alert("ID는 50글자가 최대 입니다.");
+						userID.value="";
+						return false;
 					}
 					if (userPW.value === "") {
 						userPW.focus();
 						alert("비밀번호를 입력해 주세요.");
+						return false;
+					}else if(userPW.value.length >=50){
+						userPW.focus();
+						alert("PW는 50글자가 최대 입니다.");
+						userPW.value="";
 						return false;
 					}
 
 					alert("가입을 환영합니다. 로그인해주시길 바랍니다.");
 					return true;
 				}
+				
+				function CheckID() {
+					let userID = document.getElementById("joinID");
+					if (userID.value === "") {
+						userID.focus();
+						alert("ID를 입력후 조회하여 주세요.");
+						return false;
+					}else if(userID.value.length >=50){
+						userID.focus();
+						alert("ID는 50글자가 최대 입니다.");
+						userID.value="";
+						return false;
+					}
+					return true;
+				}
+				
+				
 			</script>
 		</div>
+		<script>
+		if(${existingId} == true){
+			alert("중복되는 아이디 입니다.");
+			existId="";
+		}
+		</script>
 	</main>
 
 	<script>
@@ -237,15 +281,6 @@
 		clock();
 		setInterval(clock, 1000);
 	</script>
-
-	<footer>
-
-		<hr>
-		<div class="text-center">
-
-			<p>footer</p>
-		</div>
-	</footer>
 
 
 </body>

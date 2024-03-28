@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import middleteamproject.controller.Controller;
 import middleteamproject.controller.LogOutController;
 import middleteamproject.controller.MemberCheckController;
+import middleteamproject.controller.MemberJoinController;
 import middleteamproject.controller.MembersaveController;
 
 /**
@@ -78,9 +79,9 @@ public class FrontController extends HttpServlet {
 			methodForward(request, response, viewPage);
 
 		} else if (com.equals("/join_member")) {
-
+			controller = new MemberJoinController();
+			viewPage = controller.process(request, response);
 			
-			viewPage = "/join_member.jsp";
 			methodForward(request, response, viewPage);
 
 		} else if (com.equals("/save_member")) {
