@@ -1,6 +1,5 @@
 package middleteamproject.controller;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,25 +7,25 @@ import java.util.*;
 
 import middleteamproject.dao.MemberDAO;
 
-
-public class MemberJoinController implements Controller{
+public class MemberJoinController implements Controller {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse reponse) {
-	 
+
 		String joinId = request.getParameter("userID");
-		
+
 		MemberDAO dao = new MemberDAO();
 		List<String> list = dao.listID();
 		for (String string : list) {
-		
-		int existId = list.indexOf(joinId);
-		
-		if(existId >= 0) {
-			request.setAttribute("existingId", true);
+
+			int existId = list.indexOf(joinId);
+
+			if (existId >= 0) {
+				request.setAttribute("existingId", true);
+			}
+
 		}
 		return "/join_member.jsp";
-		
-	}
 
+	}
 }
