@@ -19,9 +19,14 @@ public class MemberJoinController implements Controller {
 		for (String string : list) {
 
 			int existId = list.indexOf(joinId);
+			request.setAttribute("validId", joinId);
 
 			if (existId >= 0) {
 				request.setAttribute("existingId", true);
+			}
+			if(existId == -1) {
+				request.setAttribute("existingId", false);
+				
 			}
 
 		}

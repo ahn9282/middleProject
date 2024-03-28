@@ -167,7 +167,7 @@
 							<form onsubmit="return CheckID()" action="${pageContext.request.contextPath }/join_member" method="post">
 						<div class="d-flex flex-row">
 						<input class="w-100 mx-auto p-3" type="text" name="userID"
-							value="" style="border-radius: 5px;" id="joinID">
+							value="${validId}" style="border-radius: 5px;" id="joinID">
 							<button type="submit" class="btn btn-primary" id="researchId">조회</button>
 						</div>
 							</form>
@@ -249,8 +249,14 @@
 			</script>
 		</div>
 		<script>
+		let userID = document.getElementById("joinID");
 		if(${existingId} == true){
 			alert("중복되는 아이디 입니다.");
+			existId="";
+		}
+		if(${existingId} == false){
+			alert("사용가능한 ID입니다.");
+			userID.value=${validId};
 			existId="";
 		}
 		</script>

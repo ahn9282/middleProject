@@ -261,16 +261,7 @@
     setInterval(clock, 1000);
   </script>
 
-  <footer>
-
-    <hr>
-    <div class="text-center">
-
-      <p>
-        footer
-      </p>
-    </div>
-  </footer>
+ 
  
 
 
