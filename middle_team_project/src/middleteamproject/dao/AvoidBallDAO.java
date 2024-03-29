@@ -10,6 +10,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import java.util.*;
 import middleteamproject.dto.AvoidBallDTO;
 
 public class AvoidBallDAO {
@@ -56,9 +57,10 @@ public class AvoidBallDAO {
 		}
 
 	}
+
 	public AvoidBallDTO topRecord(String playerId) {
 		AvoidBallDTO topRecord = new AvoidBallDTO();
-		
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -70,23 +72,23 @@ public class AvoidBallDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, playerId);
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				
-			if(rs.getString("pId")==null) {
-				return topRecord;
+
+			if (rs.next()) {
+
+				if (rs.getString("pId") == null) {
+					return topRecord;
+				}
+
+				String pid = rs.getString("pId");
+				int precord = rs.getInt("precord");
+				String pname = rs.getString("pname");
+				Timestamp recordDate = rs.getTimestamp("recordDate");
+				topRecord = new AvoidBallDTO(pid, precord, recordDate, pname);
 			}
-				
-			String pid = rs.getString("pId");
-			int precord = rs.getInt("precord");
-			String pname = rs.getString("pname");
-			Timestamp recordDate = rs.getTimestamp("recordDate");
-			topRecord = new AvoidBallDTO(pid,precord,recordDate,pname);
-			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				if (rs != null)
 					rs.close();
@@ -98,10 +100,11 @@ public class AvoidBallDAO {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return topRecord;
 	}
-	public void updateRecord(String playerId, int record ) {
+
+	public void updateRecord(String playerId, int record) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -113,7 +116,7 @@ public class AvoidBallDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, record);
 			pstmt.setString(2, playerId);
-			
+
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -133,4 +136,45 @@ public class AvoidBallDAO {
 
 	}
 
+	public List<AvoidBallDTO> topranklist() {
+		List<AvoidBallDTO> topList= new ArrayList<AvoidBallDTO>();
+	
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select * from (select  * from avoidballrecord order by precord desc) where rownum <=5";
+
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+
+				String pid = rs.getString("pid");
+				int precord = rs.getInt("precord");
+				String pname = rs.getString("pname");
+				Timestamp recordDate = rs.getTimestamp("recorddate");
+				AvoidBallDTO ranker = new AvoidBallDTO(pid, precord, recordDate, pname);
+				topList.add(ranker);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return topList;
+
+	}
 }

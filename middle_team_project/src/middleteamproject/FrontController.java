@@ -22,11 +22,10 @@ import middleteamproject.command.MembersaveCommand;
 @WebServlet("/")
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static String nowUri ="/";
-	
+	static String nowUri = "/";
+
 	public FrontController() {
 
-	
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -52,7 +51,6 @@ public class FrontController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String viewPage = null;
 		Command command = null;
-		
 
 		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
@@ -69,12 +67,9 @@ public class FrontController extends HttpServlet {
 
 		} else if (com.equals("/join_member")) {
 
-
 			viewPage = "/join_member.jsp";
-
 			command = new MemberJoinCommand();
 			viewPage = command.process(request, response);
-			
 
 			methodForward(request, response, viewPage);
 
@@ -88,18 +83,21 @@ public class FrontController extends HttpServlet {
 		} else if (com.equals("/check_member")) {
 			command = new MemberCheckCommand();
 			viewPage = command.process(request, response);
+			
 			methodForward(request, response, nowUri);
 
 		} else if (com.equals("/logout")) {
 			command = new LogOutCommand();
 			viewPage = command.process(request, response);
+			
 			methodRedirect(request, response, nowUri);
 
 		} else if (com.equals("/game_avoidBall")) {
 			command = new GameAvoidBallCommand();
 			viewPage = command.process(request, response);
 			nowUri = com;
-			viewPage =nowUri+".jsp";
+			viewPage = nowUri + ".jsp";
+			
 			methodForward(request, response, viewPage);
 
 		}

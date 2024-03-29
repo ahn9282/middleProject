@@ -1,5 +1,7 @@
 package middleteamproject.command;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,6 +19,9 @@ public class GameAvoidBallCommand implements Command {
 		String playerId = (String) session.getAttribute("userId");
 		String userName = (String) session.getAttribute("username");
 		AvoidBallDAO dao = new AvoidBallDAO();
+		List<AvoidBallDTO> topList = dao.topranklist();
+		request.setAttribute("topList", topList);
+		
 		
 		if (request.getParameter("recordtext") == null) {
 			 record = 0;

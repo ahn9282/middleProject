@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 
@@ -106,6 +107,36 @@ main {
 	display: none;
 	position: absolute;
 	top: 420px;
+}
+
+#ranktable {
+	margin-left: 900px;
+	position: absolute;
+	top: 40%;
+	width: 600px;
+	text-align: center;
+	border: 1px solid #aaaaaa;
+	border-collapse: collapse;
+
+}
+
+#ranktable tr td {
+	border: 1px solid #aaaaaa;
+	padding: 8px;
+}
+
+
+
+.gold {
+	background-color: gold;
+}
+
+.silver {
+	background-color: silver;
+}
+
+.bronze {
+	background-color: #cd7f32; /* 동 색 */
 }
 </style>
 </head>
@@ -225,11 +256,14 @@ main {
     const btnModal = document.getElementById("signBtn");
     const txtId = document.getElementById("ID");
     const txtPw = document.getElementById("PW");
+    
     function modalOn() {
       modal.style.display = "flex";
+    
     }
     function modalOff() {
       modal.style.display = "none";
+      
     }
   
 
@@ -315,13 +349,50 @@ main {
 		<canvas id="canvas2" width="500" height="400"></canvas>
 		<canvas id="canvas3" width="500" height="400"></canvas>
 		<div id="result"></div>
-		<button id="gameStartBtn" class="btn btn-primary">Game Start!!</button>
+		<button id="gameStartBtn" class="btn btn-primary">Game
+			Start!!</button>
 		<button id="reStartBtn" class="btn btn-primary">다시 하기</button>
-		<form action="${pageContext.request.contextPath}/game_avoidBall"method="post">
+
+		<form action="${pageContext.request.contextPath}/game_avoidBall"
+			method="post">
 			<input type="hidden" id="recordtext" name="recordtext" value="">
 
 			<button id="recordBtn" class="btn btn-warning">점수 기록하기</button>
 		</form>
+
+		<%
+			int rank = 0;
+		%>
+		<table id="ranktable">
+			<tr id="ranktablehead">
+				<th>순위</th>
+				<th>이름</th>
+				<th>점수</th>
+				<th>날짜</th>
+			</tr>
+			<c:forEach var="top" items="${topList}">
+				<%
+					rank++;
+						String rankColor = "";
+						if (rank == 1) {
+							rankColor = "gold";
+						} else if (rank == 2) {
+							rankColor = "silver";
+						} else if (rank == 3) {
+							rankColor = "bronze";
+						}
+				%>
+				<tr>
+					<td class="<%=rankColor%>"><%=rank%></td>
+					<td>${top.getPname() }</td>
+					<td>${top.getPlayerRecord() }</td>
+					<td>${top.getPlayerdate() }</td>
+				</tr>
+
+			</c:forEach>
+
+
+		</table>
 
 		<script>
     let canvas1 = document.getElementById("canvas1");
@@ -442,12 +513,12 @@ main {
                 red2X + redWidth >= rectX &&
                 red2Y <= rectY + rectHeight &&
                 red2Y + redHeight >= rectY)) {
+        	
             clearInterval(gameInterval);
             clearInterval(gameOver);
             alert("Game Over!!!");
             $startBtn.style.display = "none";
             $restartBtn.style.display = "block";
-            $recordBtn.style.display = "flex";
             endTime = new Date();
             result = endTime - startTime;
             let resultSpan = document.createElement("span");
@@ -460,6 +531,7 @@ main {
                 $result.appendChild($br);
                 if((Number(${topRecord})+1) <result){
                 	resultSpan.textContent ="결과 : " + result + "ms"+" 갱신!!";
+            $recordBtn.style.display = "flex";
                 }
                 $result.appendChild(topRecordSpan);
         }
@@ -529,6 +601,13 @@ main {
         document.querySelector("form").submit();
     }
 });
+    	const ranktable = document.getElementById("ranktable");
+    if(<%=username%>==null){
+    	ranktable.style.display = "none";
+    }else{
+    	ranktable.style.display = "flex";
+    	
+    }
 </script>
 
 
@@ -558,10 +637,6 @@ main {
     clock();
     setInterval(clock, 1000);
   </script>
-
-
-
-
 
 </body>
 
