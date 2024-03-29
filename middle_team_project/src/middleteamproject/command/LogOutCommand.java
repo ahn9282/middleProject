@@ -1,4 +1,4 @@
-package middleteamproject.controller;
+package middleteamproject.command;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class LogOutController implements Controller{
+public class LogOutCommand implements Command{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {

@@ -1,11 +1,11 @@
-package middleteamproject.controller;
+package middleteamproject.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import middleteamproject.dao.MemberDAO;
 
-public class MembersaveController implements Controller{
+public class MembersaveCommand implements Command{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {

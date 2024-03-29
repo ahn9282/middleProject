@@ -1,4 +1,4 @@
-package middleteamproject.controller;
+package middleteamproject.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,7 +7,7 @@ import java.util.*;
 
 import middleteamproject.dao.MemberDAO;
 
-public class MemberJoinController implements Controller {
+public class MemberJoinCommand implements Command {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {

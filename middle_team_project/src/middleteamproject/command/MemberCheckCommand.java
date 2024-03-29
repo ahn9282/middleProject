@@ -1,4 +1,4 @@
-package middleteamproject.controller;
+package middleteamproject.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import middleteamproject.dao.MemberDAO;
 import middleteamproject.dto.MemberDTO;
 
-public class MemberCheckController implements Controller{
+public class MemberCheckCommand implements Command{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {

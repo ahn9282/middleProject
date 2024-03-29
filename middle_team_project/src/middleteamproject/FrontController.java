@@ -8,12 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import middleteamproject.controller.Controller;
-import middleteamproject.controller.GameAvoidBallController;
-import middleteamproject.controller.LogOutController;
-import middleteamproject.controller.MemberCheckController;
-import middleteamproject.controller.MemberJoinController;
-import middleteamproject.controller.MembersaveController;
+
+import middleteamproject.command.Command;
+import middleteamproject.command.GameAvoidBallCommand;
+import middleteamproject.command.LogOutCommand;
+import middleteamproject.command.MemberCheckCommand;
+import middleteamproject.command.MemberJoinCommand;
+import middleteamproject.command.MembersaveCommand;
 
 /**
  * Servlet implementation class FrontController
@@ -21,7 +22,7 @@ import middleteamproject.controller.MembersaveController;
 @WebServlet("/")
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static String nowUri;
+	static String nowUri ="/";
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -60,7 +61,7 @@ public class FrontController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		String viewPage = null;
-		Controller controller = null;
+		Command command = null;
 		
 
 		String uri = request.getRequestURI();
@@ -72,7 +73,6 @@ public class FrontController extends HttpServlet {
 		System.out.println("com : " + com);
 
 		if (com.equals("/")) {
-			System.out.println("index.jsp");
 			viewPage = "index.jsp";
 			nowUri = com;
 			methodForward(request, response, viewPage);
@@ -82,33 +82,32 @@ public class FrontController extends HttpServlet {
 
 			viewPage = "/join_member.jsp";
 
-			controller = new MemberJoinController();
-			viewPage = controller.process(request, response);
+			command = new MemberJoinCommand();
+			viewPage = command.process(request, response);
 			
 
 			methodForward(request, response, viewPage);
 
 		} else if (com.equals("/save_member")) {
 
-			controller = new MembersaveController();
-			viewPage = controller.process(request, response);
+			command = new MembersaveCommand();
+			viewPage = command.process(request, response);
 
 			methodRedirect(request, response, viewPage);
 
 		} else if (com.equals("/check_member")) {
-			controller = new MemberCheckController();
-			viewPage = controller.process(request, response);
+			command = new MemberCheckCommand();
+			viewPage = command.process(request, response);
 			methodForward(request, response, nowUri);
 
 		} else if (com.equals("/logout")) {
-			controller = new LogOutController();
-			System.out.println(" nowUri : " + nowUri);
-			viewPage = controller.process(request, response);
+			command = new LogOutCommand();
+			viewPage = command.process(request, response);
 			methodRedirect(request, response, nowUri);
 
 		} else if (com.equals("/game_avoidBall")) {
-			controller = new GameAvoidBallController();
-			viewPage = controller.process(request, response);
+			command = new GameAvoidBallCommand();
+			viewPage = command.process(request, response);
 			nowUri = com;
 			viewPage =nowUri+".jsp";
 			methodForward(request, response, viewPage);

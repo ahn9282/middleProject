@@ -100,12 +100,12 @@ main {
 	display: none;
 }
 
-#recordBtn{
-margin-left: 550px;
+#recordBtn {
+	margin-left: 550px;
 	margin-top: 5%;
-	display:none;
-	position:absolute;
-	top : 200px;
+	display: none;
+	position: absolute;
+	top: 420px;
 }
 </style>
 </head>
@@ -114,6 +114,7 @@ margin-left: 550px;
 	<%
 		String username = (String) session.getAttribute("username");
 		String userId = (String) session.getAttribute("userId");
+		String topRecord = request.getParameter("topRecord");
 	%>
 	<hedear class="d-flex flex-column">
 	<form action="${pageContext.request.contextPath}/" method="post">
@@ -303,24 +304,26 @@ margin-left: 550px;
     	}
     	console.log(loginCheck)
   </script>
-	<main>
+	<main id="gmae">
 		<div class="title" id="titleAndDescription">
-    <h2><strong>Avoid RedBall!!</strong></h2>
-    <h4>방향키로 빨간 공을 피하세요!</h4>
-</div>
-<canvas id="canvas1" width="500" height="400"></canvas>
-<canvas id="canvas2" width="500" height="400"></canvas>
-<canvas id="canvas3" width="500" height="400"></canvas>
-<div id="result"></div>
-<button id="gameStartBtn" class="btn btn-primary">Game Start!!</button>
-<button id="reStartBtn" class="btn btn-primary">다시 하기</button>
-<form action="${pageContext.request.contextPath}/game_avoidBall" method="post">
-<input type="hidden" id="recordtext" name="recordtext" value="">
+			<h2>
+				<strong>Avoid RedBall!!</strong>
+			</h2>
+			<h4>방향키로 빨간 공을 피하세요!</h4>
+		</div>
+		<canvas id="canvas1" width="500" height="400"></canvas>
+		<canvas id="canvas2" width="500" height="400"></canvas>
+		<canvas id="canvas3" width="500" height="400"></canvas>
+		<div id="result"></div>
+		<button id="gameStartBtn" class="btn btn-primary">Game Start!!</button>
+		<button id="reStartBtn" class="btn btn-primary">다시 하기</button>
+		<form action="${pageContext.request.contextPath}/game_avoidBall"method="post">
+			<input type="hidden" id="recordtext" name="recordtext" value="">
 
-<button id="recordBtn" class="btn btn-warning">점수 기록하기</button>
-</form>
+			<button id="recordBtn" class="btn btn-warning">점수 기록하기</button>
+		</form>
 
-<script>
+		<script>
     let canvas1 = document.getElementById("canvas1");
     let ctx1 = canvas1.getContext("2d");
     let canvas2 = document.getElementById("canvas2");
@@ -449,7 +452,16 @@ margin-left: 550px;
             result = endTime - startTime;
             let resultSpan = document.createElement("span");
             resultSpan.textContent ="결과 : " + result + "ms";
+            let $br = document.createElement("br");
+            let topRecordSpan = document.createElement("span");
+            topRecordSpan.textContent = "최고 기록 : " +(Number(${topRecord}));
+            
                 $result.appendChild(resultSpan);
+                $result.appendChild($br);
+                if((Number(${topRecord})+1) <result){
+                	resultSpan.textContent ="결과 : " + result + "ms"+" 갱신!!";
+                }
+                $result.appendChild(topRecordSpan);
         }
     }
 
@@ -519,7 +531,7 @@ margin-left: 550px;
 });
 </script>
 
- 
+
 	</main>
 
 	<script>
