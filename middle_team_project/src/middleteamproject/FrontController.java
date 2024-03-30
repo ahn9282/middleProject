@@ -116,6 +116,13 @@ public class FrontController extends HttpServlet {
 			
 			methodForward(request, response, viewPage);
 
+		}else if (com.equals("/board")) {
+	
+			nowUri = com;
+			viewPage = nowUri + ".jsp";
+			
+			methodForward(request, response, "/board_main.jsp");
+
 		}
 
 	}
