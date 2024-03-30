@@ -144,7 +144,7 @@ main {
 		String userId = (String) session.getAttribute("userId");
 		String topRecord = request.getParameter("topRecord");
 	%>
-	<hedear class="d-flex flex-column">
+	<header class="d-flex flex-column">
 	<form action="${pageContext.request.contextPath}/" method="post">
 		<button id="home"
 			class="d-flex flex-column justify-content-center align-items-center">웹게임천국</button>
@@ -207,7 +207,8 @@ main {
 			</div>
 		</div>
 	</nav>
-	</hedear>
+	</header>
+	<main id="game">
 	<div id="gomodal"></div>
 	<div id="modal" class="modal-overlay">
 
@@ -335,7 +336,7 @@ main {
     	}
     	console.log(loginCheck)
   </script>
-	<main id="gmae">
+	
 		<div class="title" id="titleAndDescription">
 			<h2>
 				<strong>Avoid RedBall!!</strong>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -68,72 +69,16 @@
 	left: 250px;
 }
 
-canvas {
-	position: absolute;
-	border: 1px solid #aaaaaa;
+#boardNum, #boardHit, #boardGood {
+	width: 6%;
 }
 
-#result {
-	margin-left: 550px;
-	margin-top: 5%;
+#boardDate {
+	width: 25%;
 }
 
-#titleAndDescription {
-	width: 400px;
-	margin-left: 50px;
-	padding: 0px;
-}
-
-main {
-	height: 80%;
-}
-
-#gameStartBtn, #reStartBtn {
-	width: 300px;
-	height: 100px;
-	position: absolute;
-	top: 62%;
-	left: 14%;
-	transform: translate(-50%, -50%);
-}
-
-#reStartBtn {
-	display: none;
-}
-
-#recordBtn {
-	margin-left: 550px;
-	margin-top: 5%;
-	display: none;
-	position: absolute;
-	top: 420px;
-}
-
-#ranktable {
-	margin-left: 900px;
-	position: absolute;
-	top: 40%;
-	width: 600px;
-	text-align: center;
-	border: 1px solid #aaaaaa;
-	border-collapse: collapse;
-}
-
-#ranktable tr td {
-	border: 1px solid #aaaaaa;
-	padding: 8px;
-}
-
-.gold {
-	background-color: gold;
-}
-
-.silver {
-	background-color: silver;
-}
-
-.bronze {
-	background-color: #cd7f32; /* 동 색 */
+#boardWriter {
+	width: 15%;
 }
 </style>
 </head>
@@ -144,7 +89,7 @@ main {
 		String userId = (String) session.getAttribute("userId");
 		String topRecord = request.getParameter("topRecord");
 	%>
-	<hedear class="d-flex flex-column">
+	<header class="d-flex flex-column">
 	<form action="${pageContext.request.contextPath}/" method="post">
 		<button id="home"
 			class="d-flex flex-column justify-content-center align-items-center">웹게임천국</button>
@@ -207,20 +152,59 @@ main {
 			</div>
 		</div>
 	</nav>
-	</hedear>
+	</header>
+
+	<main id="board">
+
+		<div class="container">
+
+			<h2 class="my-3 text-center">자유 게시판</h2>
+			<div class="card shadow">
+				<div class="card-header ">
+					<h5 class="text-primary">DataTables Example</h5>
+				</div>
+				<div class="card-body p-3">
+					<div class="table-responsive">
+						<table class="table table-bordered table-hover">
+
+							<thead>
+								<tr class="text-center">
+									<th id="boardNum">번호</th>
+									<th id="boardTitle">제목</th>
+									<th id="boardWriter">작성자</th>
+									<th id="boardDate">날짜</th>
+									<th id="boardHit">조회수</th>
+									<th id="boardGood">좋아요</th>
+								</tr>
+							</thead>
+
+							<tbody>
+
+							</tbody>
+
+						</table>
+					</div>
+					<div id="board_page"class="container my-3 d-flex flex-row justify-content-center text-center">
+					</div>
+					<div class="card-footer d-flex justify-content-center  ">
+						<button class="btn btn-primary" id="writeBoardBtn ">글 작성</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</main>
+
 	<div id="gomodal"></div>
-	<div id="modal" class="modal-overlay">
+	<div id="modal" class="modal-overlay" style="max-height: 500px;">
 
 
-		<div
-			class="card card-border d-flex flex-column justify-content-center align-items-center"
-			id="modalcontent">
+		<div class="card card-border d-flex flex-column justify-content-center align-items-center" id="modalcontent">
 			<div class="card-header w-100">
 				<h2>Sign</h2>
 			</div>
 			<div id="card-body" class="card-body p-3 w-100 d-flex flex-row">
-				<form action="${pageContext.request.contextPath}/check_member"
-					method="post" onsubmit="return Checklogin()">
+				<form action="${pageContext.request.contextPath}/check_member" method="post" onsubmit="return Checklogin()">
 
 					<input id="loginID" class=" mx-auto p-3" type="text" name="loginID"
 						value="" style="border-radius: 5px;" placeholder="userId"><br>
@@ -244,9 +228,6 @@ main {
 			</div>
 		</div>
 	</div>
-
-
-
 	<script>
     const gomodal = document.getElementById("gomodal");
     const modal = document.getElementById("modal");
@@ -262,11 +243,7 @@ main {
       modal.style.display = "none";
       
     }
-  
-
-
-
-
+ 
     btnModal.addEventListener("click", e => {
       modalOn()
 
@@ -290,11 +267,7 @@ main {
 
     }, true)
     
-    if(<%=username%>==null){
- 	   alert("로그인 후 시작하실 수 있습니다.");
- 	   
- 	   setTimeout(function(){modalOn();},500);
-    }
+  
     </script>
 	<script>
     
@@ -312,7 +285,6 @@ main {
 				alert("비밀번호를 입력해 주세요.");
 				return false;
 			}
-
 			window.addEventListener('keydown', e => {
 			      if (modal.style.display === "flex"&& e.keyCode == 13){
 			    	  
@@ -335,10 +307,6 @@ main {
     	}
     	console.log(loginCheck)
   </script>
-	<main id="board">
-		
-
-	</main>
 
 	<script>
     function clock() {

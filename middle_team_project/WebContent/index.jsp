@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -77,7 +77,7 @@
 
   
   %>
-  <hedear class="d-flex flex-column">
+  <header class="d-flex flex-column">
   <form action="${pageContext.request.contextPath}/" method="post">
     <button id="home" class="d-flex flex-column justify-content-center align-items-center" >웹게임천국</button>
   </form>
@@ -128,9 +128,10 @@
         </div>
       </div>
     </nav>
-  </hedear>
+  </header>
+  <main>
   <div id="gomodal"></div>
-  <div id="modal" class="modal-overlay">
+  <div id="modal" class="modal-overlay"style="max-height:500px;">
 
 
     <div class="card card-border d-flex flex-column justify-content-center align-items-center" id="modalcontent">
@@ -242,8 +243,8 @@
   
    
   </script>
-  <main>
-    <div class="border w-100 d-flex justify-content-center" style="height:500px">
+  
+    <div class=" w-100 d-flex justify-content-center" style="height:500px">
       <h1 style="line-height:500px">내용</h1>
       <h1><%=username %></h1><br>
       <h1>중복여부 : ${DuplicateLogin }</h1>
