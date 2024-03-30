@@ -238,10 +238,7 @@
     	alert("환영합니다!");
     	loginCheck = "";
     	}
-    
-    	
-  
-   
+
   </script>
   
     <div class=" w-100 d-flex justify-content-center" style="height:500px">
@@ -258,7 +255,6 @@
       let minute = Number(today.getMinutes());
       let sec = Number(today.getSeconds());
 
-      //document.write(hour + " : " + minute + " : " + sec+ "<br>") ;
       if (minute < 10) {
         minute = "0" + minute;
       }
@@ -275,10 +271,6 @@
     clock();
     setInterval(clock, 1000);
   </script>
-
- 
- 
-
 
 </body>
 
