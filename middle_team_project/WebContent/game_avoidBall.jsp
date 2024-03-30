@@ -215,7 +215,7 @@ main {
 
 		<div
 			class="card card-border d-flex flex-column justify-content-center align-items-center"
-			id="modalcontent">
+			id="modalcontent" style="max-height:500px;">
 			<div class="card-header w-100">
 				<h2>Sign</h2>
 			</div>

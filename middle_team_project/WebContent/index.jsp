@@ -131,11 +131,11 @@
   </header>
   <main>
   <div id="gomodal"></div>
-  <div id="modal" class="modal-overlay"style="max-height:500px;">
+  <div id="modal" class="modal-overlay">
 
 
     <div class="card card-border d-flex flex-column justify-content-center align-items-center" id="modalcontent">
-      <div class="card-header w-100">
+      <div class="card-header w-100" style="max-height:500px;">
         <h2>Sign</h2>
       </div>
       <div id="card-body" class="card-body p-3 w-100 d-flex flex-row">

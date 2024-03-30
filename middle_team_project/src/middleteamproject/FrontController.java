@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import middleteamproject.command.BoardListCommand;
 import middleteamproject.command.Command;
 import middleteamproject.command.GameAvoidBallCommand;
 import middleteamproject.command.LogOutCommand;
@@ -117,11 +118,11 @@ public class FrontController extends HttpServlet {
 			methodForward(request, response, viewPage);
 
 		}else if (com.equals("/board")) {
-	
+			command = new BoardListCommand();
+			viewPage = command.process(request, response);
 			nowUri = com;
-			viewPage = nowUri + ".jsp";
 			
-			methodForward(request, response, "/board_main.jsp");
+			methodForward(request, response, viewPage);
 
 		}
 

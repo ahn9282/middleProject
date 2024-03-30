@@ -80,6 +80,10 @@
 #boardWriter {
 	width: 15%;
 }
+
+#boardtable {
+	text-align: center;
+}
 </style>
 </head>
 
@@ -90,68 +94,68 @@
 		String topRecord = request.getParameter("topRecord");
 	%>
 	<header class="d-flex flex-column">
-	<form action="${pageContext.request.contextPath}/" method="post">
-		<button id="home"
-			class="d-flex flex-column justify-content-center align-items-center">웹게임천국</button>
-	</form>
-	<nav class="navbar navbar-expand-lg bg-body" data-bs-theme="dark">
-		<div class="container-fluid">
+		<form action="${pageContext.request.contextPath}/" method="post">
+			<button id="home"
+				class="d-flex flex-column justify-content-center align-items-center">웹게임천국</button>
+		</form>
+		<nav class="navbar navbar-expand-lg bg-body" data-bs-theme="dark">
+			<div class="container-fluid">
 
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page"
-						href="${pageContext.request.contextPath}/game_avoidBall">공피하기게임</a>
-					</li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page"
-						href="${pageContext.request.contextPath }/game/">조원2</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page"
-						href="${pageContext.request.contextPath }/game/">조원3</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page"
-						href="${pageContext.request.contextPath }/game/">조원4</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page"
-						href="${pageContext.request.contextPath }/board">게시판</a></li>
-				</ul>
-				<span id="time" class="text-white m-2 p-0" style="min-width: 100px"></span>
-				<div id="dashboard"
-					class="d-flex flex-row justify-content-center align-items-center">
-					<%
-						if (username == null) {
-					%>
-					<div id="none-login">
-						<span class="d-flex" role="search">
-							<button class="btn btn-outline-info" id="signBtn" type="submit">sign</button>
-						</span>
-					</div>
-					<%
-						} else {
-					%>
-					<form action="${pageContext.request.contextPath }/logout"
-						method="get">
-						<div id="on-login d-flex flex-row" class="">
-							<p class="text-white" id="showUserName">
-								user:<%=username%></p>
-							<button class="btn btn-info" id="logoutBtn" type="submit">logout</button>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page"
+							href="${pageContext.request.contextPath}/game_avoidBall">공피하기게임</a>
+						</li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page"
+							href="${pageContext.request.contextPath }/game/">조원2</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page"
+							href="${pageContext.request.contextPath }/game/">조원3</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page"
+							href="${pageContext.request.contextPath }/game/">조원4</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page"
+							href="${pageContext.request.contextPath }/board">게시판</a></li>
+					</ul>
+					<span id="time" class="text-white m-2 p-0" style="min-width: 100px"></span>
+					<div id="dashboard"
+						class="d-flex flex-row justify-content-center align-items-center">
+						<%
+							if (username == null) {
+						%>
+						<div id="none-login">
+							<span class="d-flex" role="search">
+								<button class="btn btn-outline-info" id="signBtn" type="submit">sign</button>
+							</span>
 						</div>
-					</form>
-					<%
-						}
-					%>
-				</div>
+						<%
+							} else {
+						%>
+						<form action="${pageContext.request.contextPath }/logout"
+							method="get">
+							<div id="on-login d-flex flex-row" class="">
+								<p class="text-white" id="showUserName">
+									user:<%=username%></p>
+								<button class="btn btn-info" id="logoutBtn" type="submit">logout</button>
+							</div>
+						</form>
+						<%
+							}
+						%>
+					</div>
 
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
 	</header>
 
 	<main id="board">
@@ -165,7 +169,7 @@
 				</div>
 				<div class="card-body p-3">
 					<div class="table-responsive">
-						<table class="table table-bordered table-hover">
+						<table class="table table-bordered table-hover" id="boardtable">
 
 							<thead>
 								<tr class="text-center">
@@ -177,6 +181,22 @@
 									<th id="boardGood">좋아요</th>
 								</tr>
 							</thead>
+							<%
+								int boardNum = 1;
+							%>
+							<c:forEach var="board" items="${boardList }">
+								<tr>
+									<td><%=boardNum%></td>
+									<td><a href="board_view?bid=${board.bid}">${board.bTitle}</a></td>
+									<td>${board.bWriter}</td>
+									<td>${board.bDate}</td>
+									<td>${board.bHit}</td>
+									<td>${board.bGood}</td>
+								</tr>
+								<%
+									boardNum++;
+								%>
+							</c:forEach>
 
 							<tbody>
 
@@ -184,7 +204,8 @@
 
 						</table>
 					</div>
-					<div id="board_page"class="container my-3 d-flex flex-row justify-content-center text-center">
+					<div id="board_page"
+						class="container my-3 d-flex flex-row justify-content-center text-center">
 					</div>
 					<div class="card-footer d-flex justify-content-center  ">
 						<button class="btn btn-primary" id="writeBoardBtn ">글 작성</button>
@@ -196,15 +217,18 @@
 	</main>
 
 	<div id="gomodal"></div>
-	<div id="modal" class="modal-overlay" style="max-height: 500px;">
+	<div id="modal" class="modal-overlay" >
 
 
-		<div class="card card-border d-flex flex-column justify-content-center align-items-center" id="modalcontent">
+		<div
+			class="card card-border d-flex flex-column justify-content-center align-items-center"
+			id="modalcontent"style="max-height: 600px;">
 			<div class="card-header w-100">
 				<h2>Sign</h2>
 			</div>
 			<div id="card-body" class="card-body p-3 w-100 d-flex flex-row">
-				<form action="${pageContext.request.contextPath}/check_member" method="post" onsubmit="return Checklogin()">
+				<form action="${pageContext.request.contextPath}/check_member"
+					method="post" onsubmit="return Checklogin()">
 
 					<input id="loginID" class=" mx-auto p-3" type="text" name="loginID"
 						value="" style="border-radius: 5px;" placeholder="userId"><br>
