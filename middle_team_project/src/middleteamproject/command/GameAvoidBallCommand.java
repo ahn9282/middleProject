@@ -11,6 +11,7 @@ import middleteamproject.dto.AvoidBallDTO;
 
 public class GameAvoidBallCommand implements Command {
 
+	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();

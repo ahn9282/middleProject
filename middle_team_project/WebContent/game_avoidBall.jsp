@@ -69,8 +69,8 @@
 }
 
 canvas {
-	border: 1px solid #aaaaaa;
 	position: absolute;
+	border: 1px solid #aaaaaa;
 }
 
 #result {
@@ -117,15 +117,12 @@ main {
 	text-align: center;
 	border: 1px solid #aaaaaa;
 	border-collapse: collapse;
-
 }
 
 #ranktable tr td {
 	border: 1px solid #aaaaaa;
 	padding: 8px;
 }
-
-
 
 .gold {
 	background-color: gold;
@@ -602,12 +599,19 @@ main {
     }
 });
     	const ranktable = document.getElementById("ranktable");
+    	const canvasBorders = document.querySelectorAll('canvas');
+    	
+    		
     if(<%=username%>==null){
     	ranktable.style.display = "none";
+    	 $startBtn.style.display = "none";
+    
     }else{
+    	 $startBtn.style.display = "flex";
     	ranktable.style.display = "flex";
     	
     }
+   
 </script>
 
 

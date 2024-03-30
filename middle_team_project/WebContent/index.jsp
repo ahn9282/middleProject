@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    
 <!DOCTYPE html>
 <html>
 
@@ -72,6 +74,8 @@
 <body id="game" class="d-flex flex-column justify-content-center vh-300">
 <%
   String username= (String)session.getAttribute("username");
+
+  
   %>
   <hedear class="d-flex flex-column">
   <form action="${pageContext.request.contextPath}/" method="post">
@@ -223,22 +227,26 @@
    
     let loginCheck = "";
     	loginCheck = ${FoundInfo};
-    	console.log(loginCheck);
-    if(loginCheck==false){
+    	
+    if(loginCheck===false){
     	
     	alert("로그인 정보가 틀렸습니다.");
     	loginCheck = "";
     }
-    if(loginCheck==true){
+    if(loginCheck===true ){
     	alert("환영합니다!");
     	loginCheck = "";
     	}
-    	console.log(loginCheck)
+    
+    	
+  
+   
   </script>
   <main>
     <div class="border w-100 d-flex justify-content-center" style="height:500px">
       <h1 style="line-height:500px">내용</h1>
-      <h1><%=username %></h1>
+      <h1><%=username %></h1><br>
+      <h1>중복여부 : ${DuplicateLogin }</h1>
     </div>
   </main>
 

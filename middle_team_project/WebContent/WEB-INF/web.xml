@@ -13,5 +13,7 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
-
+ <listener>
+        <listener-class>middleteamproject.SessionListener</listener-class>
+    </listener>
 </web-app>  

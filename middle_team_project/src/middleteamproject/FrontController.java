@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import middleteamproject.command.Command;
 import middleteamproject.command.GameAvoidBallCommand;
@@ -44,9 +45,23 @@ public class FrontController extends HttpServlet {
 		doAction(request, response);
 	}
 
+	
 	protected void doAction(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("actionDo() ..");
+		
+		HttpSession session = request.getSession();
+		if ((String)session.getAttribute("userId") != null) {
+			String userId = (String)session.getAttribute("userId");
+			String sessionId = session.getId();
+			SessionListener sessionListener = new SessionListener();
+			if(!sessionListener.checkValidSessionId(userId,sessionId)){
+				
+				    session.invalidate(); // 세션 무효화
+				 
+			}
+		}
+		
 
 		request.setCharacterEncoding("UTF-8");
 		String viewPage = null;
@@ -59,6 +74,7 @@ public class FrontController extends HttpServlet {
 		System.out.println("uri : " + uri);
 		System.out.println("conPath : " + conPath);
 		System.out.println("com : " + com);
+		
 
 		if (com.equals("/")) {
 			viewPage = "index.jsp";
