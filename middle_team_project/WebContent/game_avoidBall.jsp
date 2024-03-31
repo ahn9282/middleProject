@@ -135,6 +135,9 @@ main {
 .bronze {
 	background-color: #cd7f32; /* 동 색 */
 }
+#ranktablehead{
+background:black;
+}
 </style>
 </head>
 
@@ -145,7 +148,7 @@ main {
 		String topRecord = request.getParameter("topRecord");
 	%>
 	<header class="d-flex flex-column">
-	<form action="${pageContext.request.contextPath}/" method="post">
+	<form action="${pageContext.request.contextPath}/home" method="post">
 		<button id="home"
 			class="d-flex flex-column justify-content-center align-items-center">웹게임천국</button>
 	</form>
@@ -362,8 +365,8 @@ main {
 			int rank = 0;
 		%>
 		<table id="ranktable">
-			<tr id="ranktablehead">
-				<th>순위</th>
+			<tr id="ranktablehead" class="text-white">
+				<th>TOP5</th>
 				<th>이름</th>
 				<th>점수</th>
 				<th>날짜</th>

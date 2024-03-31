@@ -70,15 +70,11 @@
 }
 
 #boardNum, #boardHit, #boardGood {
-	width: 8%;
-}
-
-#boardEtc {
-	width: 15%;
+	width: 6%;
 }
 
 #boardDate {
-	width: 20%;
+	width: 25%;
 }
 
 #boardWriter {
@@ -89,6 +85,28 @@
 	text-align: center;
 }
 
+#contentBoard {
+	border: 1px solid #aaaaaa;
+	width: 90%;
+	padding: 50px;
+}
+
+#boardtitle {
+	width: 75%;
+}
+
+#boardwriter {
+	width: 25%;
+}
+
+#boardUtil {
+	text-align: right;
+}
+
+#commentblock {
+	overflow: hidden;
+	min-height:8em;
+}
 </style>
 </head>
 
@@ -100,6 +118,7 @@
 	%>
 	<header class="d-flex flex-column">
 		<form action="${pageContext.request.contextPath}/home" method="post">
+			<input type="hidden" name="homedata">
 			<button id="home"
 				class="d-flex flex-column justify-content-center align-items-center">웹게임천국</button>
 		</form>
@@ -163,79 +182,116 @@
 		</nav>
 	</header>
 
-	<main id="board">
+	<main id="boardview" class="">
 
-		<div class="container">
+		<div class="container d-flex flex-row w-100" id="contentBoard">
+			<div class="d-flex flex-column w-100">
+				<div id="boardtitle" class="w-100">${selectBoard.bTitle}</div>
+				<div id="boardwriter " class="w-100" style="text-align: right;">작성자
+					: ${selectBoard.bWriter}</div>
 
-			<h2 class="my-3 text-center">자유 게시판</h2>
-			<div class="card shadow">
-				<div class="card-header ">
-					<h5 class="text-primary">DataTables Example</h5>
+				<div class="d-flex flex-row w-100 " id="boardUtil"
+					style="border-bottom: 1px solid #cccccc; margin-bottom: 50px;">
+					<div id="boardDate" class="w-100">게시일 : ${selectBoard.bDate}
+						조회수 : ${selectBoard.bHit}</div>
 				</div>
-				<div class="card-body p-3">
-					<div class="table-responsive">
-						<table class="table table-bordered table-hover" id="boardtable">
 
-							<thead>
-								<tr class="text-center">
-									<th id="boardNum">번호</th>
-									<th id="boardTitle">제목</th>
-									<th id="boardWriter">작성자</th>
-									<th id="boardDate">날짜</th>
-									<th id="boardHit">조회수</th>
-									<th id="boardGood">좋아요</th>
-									<th id="boardEtc">비고</th>
-								</tr>
-							</thead>
-							<%
-								int boardNum = 1;
-							%>
-							<c:forEach var="board" items="${boardList }">
-								<tr>
-									<td><%=boardNum%></td>
-									<td><a href="board_view?bid=${board.bid}">${board.bTitle}</a></td>
-									<td>${board.bWriter}</td>
-									<td>${board.bDate}</td>
-									<td>${board.bHit}</td>
-									<td>${board.bGood}</td>
-									<td class="m-0 d-flex flex-row justify-content-center"><c:if
-											test="${userId != null && userId == board.bWriterId}">
-											<form action="${pageContext.request.contextPath }/board_modifyView" method="post">
-												<input type="hidden" name="modifyBid" value="${board.bid}">
-												<input type="hidden" name="modifyBtitle" value="${board.bTitle}">
-													 <input type="hidden" name="modifyBcontent" value="${board.bContent}"> 
-													<button type="submit" class="btn btn-warning p-0" id="mdBtn">수정</button>
-											</form>
-											<form action="${pageContext.request.contextPath }/board_delete" method="post">
-												<input type="hidden" name="deleteBid" value="${board.bid}">
-												<button type="submit" class="btn btn-secondary p-0" id="dlBtn">삭제</button>
-											</form>
-										</c:if></td>
-								</tr>
-								<%
-									boardNum++;
-								%>
-							</c:forEach>
+				<div id="boardContent" class="px-5" style="margin-bottom: 100px;">${selectBoard.bContent}</div>
 
-							<tbody>
 
-							</tbody>
+				<div id="goodAndHate"
+					class="d-flex flex-row justify-content-center align-items-center"
+					style="margin-bottom: 60px; border-bottom: 1px solid #aaaaaa; padding-bottom: 30px;">
 
-						</table>
-					</div>
-					<div id="board_page"
-						class="container my-3 d-flex flex-row justify-content-center text-center">
-					</div>
-					<div class="card-footer d-flex justify-content-center  ">
-					<c:if test="${userId != null}">
-						<a class="btn btn-primary" id="writeBoardBtn" href="${pageContext.request.contextPath }/board_WriteForm">글 작성</a>
+					<c:if test="${userId != null }">
+						<form id="goodForm"
+							action="${pageContext.request.contextPath}/board_good" method="post">
+							<input type="hidden" name="bidG" value="${selectBoard.bid}">
+							<button type="submit" name="good" class="btn btn-primary"
+								id="goodBtn" value="1">
+								<p>좋아요</p>${selectBoard.bGood}</button>
+						</form>
+						<form id="hateForm"
+							action="${pageContext.request.contextPath}/board_hate" method="post">
+									<input type="hidden" name="bidH" value="${selectBoard.bid}">
+							<button type="submit" name="hate" class="btn btn-danger"
+								id="hateBtn" value="1">
+								<p>싫어요</p>${selectBoard.bHate}</button>
+						</form>
+						
+						
 					</c:if>
-					</div>
+					<c:if test="${userId == null }">
+						<button type="submit" name="good" class="btn btn-primary"
+							id="goodBtn" value="1">
+							<p>좋아요</p>${selectBoard.bGood}</button>
+						<button type="submit" name="hate" class="btn btn-danger"
+							id="hateBtn" value="1">
+							<p>싫어요</p>${selectBoard.bHate}</button>
+					</c:if>
+
+
+				</div>
+
+
+				<c:if test="${userId != null }">
+
+					<form action="${pageContext.request.contextPath}/comment_write"
+						method="post" id="commentForm w-100" >
+						<div id="writeComment" class="w-100 d-flex flex-row ">
+						
+								<input type="hidden" name="bidC" value="${selectBoard.bid}">
+							<input type="text" name="commentContent" value=""
+								placeholder="예쁜 댓글 문화를 만듭시다."
+								style="width: 90%; min-height: 100px; border-radius: 15px; margin-bottom: 60px;">
+								
+							<div>
+							
+								<button type="submit"  name="good"
+									class="btn btn-secondary" id="commentBtn"
+									style="min-height: 100px;">댓글 달기</button>
+							</div>
+						</div>
+					</form>
+				</c:if>
+				<%
+					int commentNum = 1;
+				%>
+				<div id="commentblock">
+					<c:forEach var="comment" items="${comments }">
+						<div class="w-100" style="border-top: 1px solid #cccccc">
+							<div class="w-100 d-flex flex-row justify-content-between">
+								<p class="fw-bold" style="padding-left: 3%;">
+									익명<%=commentNum%></p>
+							</div>
+							<div style="padding-right: 5%; padding-left: 5%;">${comment.cContent }</div>
+							<p class="d-flex flex-row w-100"
+								style="text-align: right; padding-right: 5%; ">
+								<c:if test="${userId != null }">
+									<form action="comment_like" method="post">
+										<input type="hidden" name="commentBelong" value="${selectBoard.bid}">
+										<input type="hidden" name="commentCont" value="${comment.cContent}">
+										<input type="hidden" name="commentReco" value="${comment.crecommand}">
+										<button type="submit" name="commentRBtn" style="padding: 0;"
+											class="btn btn-warning">★</button>
+										추천 수 : ${ comment.crecommand}
+									</form>
+
+								</c:if>
+
+							</p>
+						</div>
+						<%
+							commentNum++;
+						%>
+					</c:forEach>
 				</div>
 
 			</div>
 		</div>
 	</main>
+
+	<%--여기부터는 모달 --%>
 
 	<div id="gomodal"></div>
 	<div id="modal" class="modal-overlay">
@@ -310,8 +366,8 @@
       if (e.target == modal)
         modalOff();
 
-    }, true)
-    
+    }, true);
+ 
   
     </script>
 	<script>
@@ -340,7 +396,7 @@
    
     let loginCheck = "";
     	loginCheck = ${FoundInfo};
-    	console.log(loginCheck);
+    
     if(loginCheck==false){
     	
     	alert("로그인 정보가 틀렸습니다.");
@@ -350,13 +406,16 @@
     	alert("환영합니다!");
     	loginCheck = "";
     	}
-    	
-<%--     const $wbBtn = document.getElementById('writeBoardBtn');
-    	
-    <% if(userId != null) { %>
-    $wbBtn.style.display="block";
-<% } %> --%>
- 
+    let loginIng = <%=username%>==null;
+    function nonlogin(){
+    	if(loginIng==true){
+    		function(){modalOn(});
+    		return false;
+    	}else{
+    		return true;
+    	}
+    }
+   
   </script>
 
 	<script>

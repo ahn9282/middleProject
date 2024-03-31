@@ -77,7 +77,7 @@
 <body id="game" class="d-flex flex-column justify-content-center vh-300">
 	<hedear class="d-flex flex-column"> <a id="home"
 		class="d-flex flex-column justify-content-center align-items-center"
-		href="/middle_team_project/">웹게임천국</a>
+		href="${pageContext.request.contextPath}/home">웹게임천국</a>
 	<nav class="navbar navbar-expand-lg bg-body" data-bs-theme="dark">
 		<div class="container-fluid">
 

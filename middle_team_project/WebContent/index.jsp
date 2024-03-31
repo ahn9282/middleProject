@@ -78,7 +78,7 @@
   
   %>
   <header class="d-flex flex-column">
-  <form action="${pageContext.request.contextPath}/" method="post">
+  <form action="${pageContext.request.contextPath}/home" method="post">
     <button id="home" class="d-flex flex-column justify-content-center align-items-center" >웹게임천국</button>
   </form>
     <nav class="navbar navbar-expand-lg bg-body" data-bs-theme="dark">
