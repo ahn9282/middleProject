@@ -10,8 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import middleteamproject.command.BoardDeleteCommand;
 import middleteamproject.command.BoardListCommand;
+import middleteamproject.command.BoardModifyCommand;
+import middleteamproject.command.BoardReadCommand;
+import middleteamproject.command.BoardUpGoodCommand;
+import middleteamproject.command.BoardUpHateCommand;
+import middleteamproject.command.BoardWriteCommand;
 import middleteamproject.command.Command;
+import middleteamproject.command.CommentLikeCommand;
+import middleteamproject.command.CommentWriteCommand;
 import middleteamproject.command.GameAvoidBallCommand;
 import middleteamproject.command.LogOutCommand;
 import middleteamproject.command.MemberCheckCommand;
@@ -46,23 +54,21 @@ public class FrontController extends HttpServlet {
 		doAction(request, response);
 	}
 
-	
 	protected void doAction(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("actionDo() ..");
-		
+
 		HttpSession session = request.getSession();
-		if ((String)session.getAttribute("userId") != null) {
-			String userId = (String)session.getAttribute("userId");
+		if ((String) session.getAttribute("userId") != null) {
+			String userId = (String) session.getAttribute("userId");
 			String sessionId = session.getId();
 			SessionListener sessionListener = new SessionListener();
-			if(!sessionListener.checkValidSessionId(userId,sessionId)){
-				
-				    session.invalidate(); // 세션 무효화
-				 
+			if (!sessionListener.checkValidSessionId(userId, sessionId)) {
+
+				session.invalidate(); // 세션 무효화
+
 			}
 		}
-		
 
 		request.setCharacterEncoding("UTF-8");
 		String viewPage = null;
@@ -75,16 +81,14 @@ public class FrontController extends HttpServlet {
 		System.out.println("uri : " + uri);
 		System.out.println("conPath : " + conPath);
 		System.out.println("com : " + com);
-		
 
-		if (com.equals("/")) {
+		if (com.equals("/home")) {
 			viewPage = "index.jsp";
 			nowUri = com;
 			methodForward(request, response, viewPage);
 
 		} else if (com.equals("/join_member")) {
 
-			viewPage = "/join_member.jsp";
 			command = new MemberJoinCommand();
 			viewPage = command.process(request, response);
 
@@ -100,13 +104,13 @@ public class FrontController extends HttpServlet {
 		} else if (com.equals("/check_member")) {
 			command = new MemberCheckCommand();
 			viewPage = command.process(request, response);
-			
+
 			methodForward(request, response, nowUri);
 
 		} else if (com.equals("/logout")) {
 			command = new LogOutCommand();
 			viewPage = command.process(request, response);
-			
+
 			methodRedirect(request, response, nowUri);
 
 		} else if (com.equals("/game_avoidBall")) {
@@ -114,15 +118,76 @@ public class FrontController extends HttpServlet {
 			viewPage = command.process(request, response);
 			nowUri = com;
 			viewPage = nowUri + ".jsp";
-			
+
 			methodForward(request, response, viewPage);
 
-		}else if (com.equals("/board")) {
+		} else if (com.equals("/board")) {
 			command = new BoardListCommand();
 			viewPage = command.process(request, response);
 			nowUri = com;
-			
+
 			methodForward(request, response, viewPage);
+
+		} else if (com.equals("/board_view")) {
+			command = new BoardReadCommand();
+			viewPage = command.process(request, response);
+			String queryString = "?" + request.getQueryString();
+			nowUri = com + queryString;
+
+			methodForward(request, response, viewPage);
+
+		} else if (com.equals("/board_modifyView")) {
+
+			viewPage = "/board_modifyView.jsp";
+			methodForward(request, response, viewPage);
+
+		} else if (com.equals("/board_modify")) {
+
+			command = new BoardModifyCommand();
+			viewPage = command.process(request, response);
+			methodRedirect(request, response, viewPage);
+
+		} else if (com.equals("/board_delete")) {
+
+			command = new BoardDeleteCommand();
+			viewPage = command.process(request, response) + nowUri;
+			methodRedirect(request, response, viewPage);
+
+		} else if (com.equals("/board_WriteForm")) {
+
+			viewPage = com + ".jsp";
+			methodForward(request, response, viewPage);
+
+		} else if (com.equals("/board_Write")) {
+
+			command = new BoardWriteCommand();
+			viewPage = command.process(request, response);
+			methodRedirect(request, response, viewPage);
+
+		} else if (com.equals("/board_good")) {
+
+			command = new BoardUpGoodCommand();
+			viewPage = command.process(request, response) + nowUri;
+			methodRedirect(request, response, viewPage);
+
+		}
+		else if (com.equals("/board_hate")) {
+
+			command = new BoardUpHateCommand();
+			viewPage = command.process(request, response) + nowUri;
+			methodRedirect(request, response, viewPage);
+
+		}else if (com.equals("/comment_write")) {
+
+			command = new CommentWriteCommand();
+			viewPage = command.process(request, response) + nowUri;
+			methodRedirect(request, response, viewPage);
+
+		}else if (com.equals("/comment_like")) {
+
+			command = new CommentLikeCommand();
+			viewPage = command.process(request, response) + nowUri;
+			methodRedirect(request, response, viewPage);
 
 		}
 
