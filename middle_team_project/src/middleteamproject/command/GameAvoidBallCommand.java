@@ -33,7 +33,6 @@ public class GameAvoidBallCommand implements Command {
 				topRecord = 0;
 			} else {
 				topRecord = player.getPlayerRecord();
-				String pname = player.getPname();
 			}
 			if (record != 0) {
 				if (player.getPlayerdate() == null) {
