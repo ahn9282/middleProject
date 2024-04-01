@@ -60,6 +60,7 @@ public class FrontController extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		if ((String) session.getAttribute("userId") != null) {
+			//session에서 userId 꺼내오기
 			String userId = (String) session.getAttribute("userId");
 			String sessionId = session.getId();
 			SessionListener sessionListener = new SessionListener();
