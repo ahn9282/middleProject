@@ -357,7 +357,8 @@ background:black;
 		<form action="${pageContext.request.contextPath}/game_avoidBall"
 			method="post">
 			<input type="hidden" id="recordtext" name="recordtext" value="">
-
+			<input type="hidden" id="recordName" name="recordtext" value="<%=username%>">
+			<input type="hidden" id="recordId" name="recordtext" value="<%=userId%>">
 			<button id="recordBtn" class="btn btn-warning">점수 기록하기</button>
 		</form>
 
