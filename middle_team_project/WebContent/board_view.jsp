@@ -185,7 +185,7 @@
 
 		<div class="container d-flex flex-row w-100" id="contentBoard">
 			<div class="d-flex flex-column w-100">
-				<div id="boardtitle" class="w-100">${selectBoard.bTitle}</div>
+				<div id="boardtitle" class="w-100 "><strong>${selectBoard.bTitle}</strong></div>
 				<div id="boardwriter " class="w-100" style="text-align: right;">작성자
 					: ${selectBoard.bWriter}</div>
 

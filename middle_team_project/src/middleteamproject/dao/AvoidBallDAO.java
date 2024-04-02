@@ -177,4 +177,43 @@ public class AvoidBallDAO {
 		return topList;
 
 	}
+	public int showRanking(String playerId) {
+		AvoidBallDTO topRecord = new AvoidBallDTO();
+		int ranking =0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select rank from(select precord,rownum as rank,pid from(select * from avoidballrecord order by  precord desc)) where pid=?";
+
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, playerId);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+
+
+				 ranking = rs.getInt("rank");
+				
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return ranking;
+	}
 }

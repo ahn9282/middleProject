@@ -164,7 +164,7 @@
 			공피하기 기록 :
 				<div id="vallInfo" class=" mb-5 pb-3 d-flex flex-row align-items-center" style="margin-left:30px;border-bottom:1px solid #aaaaaa; ">
 
-					 <H3>최고 기록 : <strong>asd</strong></H3>  위
+					 <H3 class="mr-3">최고 기록 :  <strong>${toprecord}</strong></H3>&nbsp&nbsp &nbsp&nbsp<h2><strong>${ranking}위</strong></h2>
 				</div>
 			게임2 기록 :
 				
