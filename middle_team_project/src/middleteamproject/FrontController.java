@@ -23,7 +23,10 @@ import middleteamproject.command.CommentWriteCommand;
 import middleteamproject.command.GameAvoidBallCommand;
 import middleteamproject.command.LogOutCommand;
 import middleteamproject.command.MemberCheckCommand;
+import middleteamproject.command.MemberDeleteCommand;
+import middleteamproject.command.MemberInqueryCommand;
 import middleteamproject.command.MemberJoinCommand;
+import middleteamproject.command.MemberModifyCommand;
 import middleteamproject.command.MembersaveCommand;
 
 /**
@@ -57,27 +60,27 @@ public class FrontController extends HttpServlet {
 	protected void doAction(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("actionDo() ..");
+		String uri = request.getRequestURI();
+		String conPath = request.getContextPath();
+		String com = uri.substring(conPath.length());
 
 		HttpSession session = request.getSession();
 		if ((String) session.getAttribute("userId") != null) {
-			//session에서 userId 꺼내오기
+			// session에서 userId 꺼내오기
 			String userId = (String) session.getAttribute("userId");
 			String sessionId = session.getId();
 			SessionListener sessionListener = new SessionListener();
-			if (!sessionListener.checkValidSessionId(userId, sessionId)) {
+			if (!sessionListener.checkValidSessionId(userId, sessionId) && com != "/check_member") {
 
 				session.invalidate(); // 세션 무효화
-
+				response.sendRedirect(request.getContextPath() + "/duplicated_member");
+				return;
 			}
 		}
 
 		request.setCharacterEncoding("UTF-8");
 		String viewPage = null;
 		Command command = null;
-
-		String uri = request.getRequestURI();
-		String conPath = request.getContextPath();
-		String com = uri.substring(conPath.length());
 
 		System.out.println("uri : " + uri);
 		System.out.println("conPath : " + conPath);
@@ -86,6 +89,12 @@ public class FrontController extends HttpServlet {
 		if (com.equals("/home")) {
 			viewPage = "index.jsp";
 			nowUri = com;
+			methodForward(request, response, viewPage);
+
+		} else if (com.equals("/duplicated_member")) {
+			request.setAttribute("isDuplicated", "Y");
+			viewPage = "/home";
+
 			methodForward(request, response, viewPage);
 
 		} else if (com.equals("/join_member")) {
@@ -171,23 +180,40 @@ public class FrontController extends HttpServlet {
 			viewPage = command.process(request, response) + nowUri;
 			methodRedirect(request, response, viewPage);
 
-		}
-		else if (com.equals("/board_hate")) {
+		} else if (com.equals("/board_hate")) {
 
 			command = new BoardUpHateCommand();
 			viewPage = command.process(request, response) + nowUri;
 			methodRedirect(request, response, viewPage);
 
-		}else if (com.equals("/comment_write")) {
+		} else if (com.equals("/comment_write")) {
 
 			command = new CommentWriteCommand();
 			viewPage = command.process(request, response) + nowUri;
 			methodRedirect(request, response, viewPage);
 
-		}else if (com.equals("/comment_like")) {
+		} else if (com.equals("/comment_like")) {
 
 			command = new CommentLikeCommand();
 			viewPage = command.process(request, response) + nowUri;
+			methodRedirect(request, response, viewPage);
+
+		} else if (com.equals("/inquery_member")) {
+
+			command = new MemberInqueryCommand();
+			viewPage = command.process(request, response) + com + ".jsp";
+			methodForward(request, response, viewPage);
+
+		} else if (com.equals("/modify_member")) {
+
+			command = new MemberModifyCommand();
+			viewPage = command.process(request, response);
+			methodRedirect(request, response, viewPage);
+
+		} else if (com.equals("/delete_member")) {
+
+			command = new MemberDeleteCommand();
+			viewPage = command.process(request, response);
 			methodRedirect(request, response, viewPage);
 
 		}
@@ -206,7 +232,7 @@ public class FrontController extends HttpServlet {
 	}
 
 	protected void methodRedirect(HttpServletRequest request, HttpServletResponse response, String viewPage) {
-		String redirectUri = "/middle_team_project" + viewPage;
+		String redirectUri = request.getContextPath() + viewPage;
 		try {
 			response.sendRedirect(redirectUri);
 		} catch (IOException e) {

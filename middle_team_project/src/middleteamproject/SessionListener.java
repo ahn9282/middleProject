@@ -14,7 +14,7 @@ public class SessionListener implements HttpSessionListener {
 	private static final Map<String,String> sessions = new ConcurrentHashMap<>();
 
 	
-	//synchronized키워드는 톰캣의 멀티쓰레드로 인한 동시 접근을 막아 처리 순서를 보장하기 위함
+	//synchronized키워드는 톰캣의 멀티쓰레드로 인한 동시 접근을 막아 처리 순서를 보장
 	public synchronized static  boolean duplicateLogin(String userId) {
 		
 		return sessions.containsKey(userId);
@@ -31,17 +31,16 @@ public class SessionListener implements HttpSessionListener {
         return sessionId.equals(sessions.get(userId));
 	}
 	
-	// session 생성 시 sessions에 넣어 전역으로 세션을 관리
 	@Override
 	public void sessionCreated(HttpSessionEvent hse) {
 		  
-
 	}
 
 	// 해당 세션 종료 시 생명주기 종료 시 sessions에서도 해당 userId의 키를 가진 값 제거
 	@Override
 	public void sessionDestroyed(HttpSessionEvent hse) {
 			sessions.remove((String)hse.getSession().getAttribute("userId")); // sessions에서 제거
+			System.out.println("세션 하나 제거");
 		
 	}
 }

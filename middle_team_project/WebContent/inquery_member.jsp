@@ -68,50 +68,14 @@
 	top: 12px;
 	left: 250px;
 }
-
-#boardNum, #boardHit, #boardGood {
-	width: 6%;
-}
-
-#boardDate {
-	width: 25%;
-}
-
-#boardWriter {
-	width: 15%;
-}
-
-#boardtable {
-	text-align: center;
-}
-
-#contentBoard {
-	border: 1px solid #aaaaaa;
-	width: 90%;
-	padding: 50px;
-}
-
-#boardtitle {
-	width: 75%;
-}
-
-#boardwriter {
-	width: 25%;
-}
-
-#boardUtil {
-	text-align: right;
-}
-
-
 </style>
 </head>
 
 <body id="game" class="d-flex flex-column justify-content-center vh-300">
 	<%
+	String userId = (String)session.getAttribute("userId");
 		String username = (String) session.getAttribute("username");
-		String userId = (String) session.getAttribute("userId");
-		String topRecord = request.getParameter("topRecord");
+		String isDuplicated = request.getParameter("isDuplicated");
 	%>
 	<header class="d-flex flex-column">
 		<form action="${pageContext.request.contextPath}/home" method="post">
@@ -131,7 +95,7 @@
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
-							href="${pageContext.request.contextPath}/game_avoidBall">공피하기게임</a>
+							href="${pageContext.request.contextPath}/game_avoidBall">공피하기</a>
 						</li>
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
@@ -163,7 +127,7 @@
 						<form action="${pageContext.request.contextPath }/logout"
 							method="get">
 							<div id="on-login d-flex flex-row" class="">
-								<a class="text-white" id="showUserName" href="${pageContext.request.contextPath }/inquery_member">user:<%=username %></a>
+								<a class="text-white" id="showUserName">user:<%=username%></a>
 								<button class="btn btn-info" id="logoutBtn" type="submit">logout</button>
 							</div>
 						</form>
@@ -176,118 +140,53 @@
 			</div>
 		</nav>
 	</header>
+	<main>
+		<div class="container border" style="width: 80%;">
 
-	<main id="boardview" class="">
-
-		<div class="container d-flex flex-row w-100" id="contentBoard">
-			<div class="d-flex flex-column w-100">
-			<div class="w-100 text-center" style=" border-bottom:1px solid #cccccc">
-			<h1>글 작성</h1>
+			<div class="w-100 text-center">
+				<h1>회원 정보</h1>
 			</div>
-				<form action="board_Write" method="post"onsubmit="return checkNullInput()">
-				<div id="boardtitle" class="w-100 my-3" >
-				
-			제목: 	<input type="text" name="btitle" value="제목" style=" margin-left:1.3em;" placeholder="제목" id="inputTitle"> 
+			Id :
+				<div id="idInfo" class=" mb-5  pb-3 d-flex flex-row align-items-center" style="margin-left:30px;margin-top:20px;border-bottom:1px solid #aaaaaa; ">
+						<h4><%=userId %></h4>
 				</div>
-				
-				<div id="boardwriter " class="w-100 py-3" style=" border-bottom:1px solid #cccccc" >
-				작성자 : <input type="text" name="bwriter" value="<%=username%>" disabled> 
+			닉네임 :
+					<form action="${pageContext.request.contextPath }/modify_member" method="post">
+				<div id="nameInfo" class=" mb-5 pb-3 d-flex flex-row align-items-center" style="margin-left:30px; ">
+					<input type="text" name="nameUser" value="${userName }" style="margin-left: 1.3em;"  id="inputTitle">
 				</div>
+			PW :
+				<div id="pwInfo" class=" mb-5 pb-3 d-flex flex-row align-items-center" style="margin-left:30px; border-bottom:1px solid #aaaaaa;">
+					 <input type="password" name="pwUser" value="${userPw }" style="margin-left: 1.3em;"  id="inputTitle">
+					 <button type="submit" class="btn btn-info my-3">수정</button>(닉네임과 함께 수정됩니다.)
+				</div>
+					 </form>
+			공피하기 기록 :
+				<div id="vallInfo" class=" mb-5 pb-3 d-flex flex-row align-items-center" style="margin-left:30px;border-bottom:1px solid #aaaaaa; ">
 
-				
-
-				<div id="boardContent" class=" my-5">
-				내용 : <textarea name="bcontent"  style="width:100%; min-height:150px;"id="inputContent">내용</textarea>
+					 <H3>최고 기록 : <strong>asd</strong></H3>  위
 				</div>
+			게임2 기록 :
 				
-				<button type="submit" class="btn btn-primary" >작성</button>
-				<a class="btn btn-secondary" href="${pageContext.request.contextPath }/board">취소</a>
-				</form>
+				<div id="game2Info" class=" mb-5 pb-3 d-flex flex-row align-items-center" style="margin-left:30px;">
+
+					 <h3>게임 시간 : </h3>
+				</div>
+				<div id="deleteAndBack" class=" mb-5 d-flex flex-row align-items-center justify-content-center" style="margin-left:30px; border-top:1px solid #aaaaaa;">
+
+					 <form action="${pageContext.request.contextPath }/delete_member" method="post">
+					  <button type="submit" class="btn btn-danger my-3">회원 탈퇴</button>
+					  <a href="${pageContext.request.contextPath }/home" class="btn btn-secondary my-3">취소</a>
+					 </form>
+				</div>
 			
-				</div>
+				
+
+			
 		</div>
-	</main>
-
-	<%--여기부터는 모달 --%>
-
-	<div id="gomodal"></div>
-	<div id="modal" class="modal-overlay">
 
 
-		<div
-			class="card card-border d-flex flex-column justify-content-center align-items-center"
-			id="modalcontent" style="max-height: 600px;">
-			<div class="card-header w-100">
-				<h2>Sign</h2>
-			</div>
-			<div id="card-body" class="card-body p-3 w-100 d-flex flex-row">
-				<form action="${pageContext.request.contextPath}/check_member"
-					method="post" onsubmit="return Checklogin()">
-
-					<input id="loginID" class=" mx-auto p-3" type="text" name="loginID"
-						value="" style="border-radius: 5px;" placeholder="userId"><br>
-
-					<input id="loginPW" class=" mx-auto p-3" type="password"
-						name="loginPW" value="" style="border-radius: 5px;"
-						placeholder="Password">
-					<button id="loginBtn" class="btn btn-primary me-auto" type="submit">로그인</button>
-
-				</form>
-			</div>
-
-			<div
-				class="card-footer w-100 d-flex flex-row justify-content-between">
-				<form action="${pageContext.request.contextPath}/join_member"
-					method="post">
-					<button class="btn btn-primary me-auto">회원가입</button>
-				</form>
-
-				<a class="btn btn-secondary" id="closebtn">취소</a>
-			</div>
-		</div>
-	</div>
-	<script>
-    const gomodal = document.getElementById("gomodal");
-    const modal = document.getElementById("modal");
-    const btnModal = document.getElementById("signBtn");
-    const txtId = document.getElementById("ID");
-    const txtPw = document.getElementById("PW");
-    
-    function modalOn() {
-      modal.style.display = "flex";
-    
-    }
-    function modalOff() {
-      modal.style.display = "none";
-      
-    }
- 
-    btnModal.addEventListener("click", e => {
-      modalOn()
-
-    })
-    const closeBtn = document.getElementById("closebtn");
-    closeBtn.addEventListener("click", e => {
-      modalOff()
-
-    })
-
-    window.addEventListener("keyup", e => {
-      if (modal.style.display === "flex" && e.key === "Escape") {
-        modalOff()
-
-      }
-    })
-    mainCancel = document.getElementById("main");
-    window.addEventListener('click', e => {
-      if (e.target == modal)
-        modalOff();
-
-    }, true);
-    
-  
-    </script>
-	<script>
+		<script>
     
     function Checklogin(){
     	loginID = document.getElementById("loginID");
@@ -303,6 +202,7 @@
 				alert("비밀번호를 입력해 주세요.");
 				return false;
 			}
+
 			window.addEventListener('keydown', e => {
 			      if (modal.style.display === "flex"&& e.keyCode == 13){
 			    	  
@@ -313,33 +213,21 @@
    
     let loginCheck = "";
     	loginCheck = ${FoundInfo};
-    
-    if(loginCheck==false){
+    	
+    if(loginCheck===false){
     	
     	alert("로그인 정보가 틀렸습니다.");
     	loginCheck = "";
     }
-    if(loginCheck==true){
+    if(loginCheck===true ){
     	alert("환영합니다!");
     	loginCheck = "";
     	}
-    
-    
-    const $inTitle = document.getElementById('inputTitle');
-    const $inContent = document.getElementById('inputContent');
-    
-    function checkNullInput(){
-    	if($inTitle.value ===null||$inTitle.value==""){
-    		alert("제목을 입력해주세여.");
-    		return false;
-    	}else if($inContent.value ===null ||$inContent.value==""){
-    		alert("글의 내용을 입력해주세요.");
-    		return false;
-    	}else{
-	return true;    		
-    	}
-    }
+
   </script>
+
+	
+	</main>
 
 	<script>
     function clock() {
@@ -348,7 +236,6 @@
       let minute = Number(today.getMinutes());
       let sec = Number(today.getSeconds());
 
-      
       if (minute < 10) {
         minute = "0" + minute;
       }
@@ -364,6 +251,10 @@
     }
     clock();
     setInterval(clock, 1000);
+    let isDuplicated = "${isDuplicated}";
+    if(isDuplicated==="Y"){
+    	alert("새로운 이용자가 로그인하여 중복되었습니다. 로그아웃됩니다.");
+    }
   </script>
 
 </body>

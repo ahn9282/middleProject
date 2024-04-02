@@ -148,8 +148,7 @@
 						<form action="${pageContext.request.contextPath }/logout"
 							method="get">
 							<div id="on-login d-flex flex-row" class="">
-								<p class="text-white" id="showUserName">
-									user:<%=username%></p>
+							<a class="text-white" id="showUserName" href="${pageContext.request.contextPath }/inquery_member">user:<%=username %></a>
 								<button class="btn btn-info" id="logoutBtn" type="submit">logout</button>
 							</div>
 						</form>

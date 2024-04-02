@@ -74,7 +74,7 @@
 <body id="game" class="d-flex flex-column justify-content-center vh-300">
 <%
   String username= (String)session.getAttribute("username");
-
+	String isDuplicated = request.getParameter("isDuplicated");
   
   %>
   <header class="d-flex flex-column">
@@ -118,7 +118,7 @@
           <%}else{ %>
           <form action="${pageContext.request.contextPath }/logout" method="get">
           <div id="on-login d-flex flex-row" class="">
-          <p class="text-white" id="showUserName">user:<%=username %></p>
+          <a class="text-white" id="showUserName" href="${pageContext.request.contextPath }/inquery_member">user:<%=username %></a>
           <button class="btn btn-info" id="logoutBtn" type="submit">logout</button>   
           </div>
           </form>
@@ -241,11 +241,7 @@
 
   </script>
   
-    <div class=" w-100 d-flex justify-content-center" style="height:500px">
-      <h1 style="line-height:500px">내용</h1>
-      <h1><%=username %></h1><br>
-      <h1>중복여부 : ${DuplicateLogin }</h1>
-    </div>
+   
   </main>
 
   <script>
@@ -270,6 +266,10 @@
     }
     clock();
     setInterval(clock, 1000);
+    let isDuplicated = "${isDuplicated}";
+    if(isDuplicated==="Y"){
+    	alert("새로운 이용자가 로그인하여 중복되었습니다. 로그아웃됩니다.");
+    }
   </script>
 
 </body>

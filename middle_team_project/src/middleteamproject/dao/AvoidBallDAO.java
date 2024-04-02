@@ -109,7 +109,7 @@ public class AvoidBallDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "update avoidballrecord set precord = ? where pId = ?";
+		String sql = "update avoidballrecord set precord = ?, recorddate = sysdate where pId = ?";
 
 		try {
 			conn = dataSource.getConnection();
