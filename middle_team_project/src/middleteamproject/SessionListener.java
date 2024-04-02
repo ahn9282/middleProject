@@ -40,7 +40,6 @@ public class SessionListener implements HttpSessionListener {
 	@Override
 	public void sessionDestroyed(HttpSessionEvent hse) {
 			sessions.remove((String)hse.getSession().getAttribute("userId")); // sessions에서 제거
-			System.out.println("세션 하나 제거");
 		
 	}
 }
