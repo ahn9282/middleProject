@@ -130,18 +130,9 @@
       </div>
     </nav>
   </header>
-  <main>
-  
-<%--   /*본인 내용*/
-  
-    <div class=" w-100 d-flex justify-content-center" style="height:500px">
-      <h1 style="line-height:500px">내용</h1>
-      <h1><%=username %></h1><br>
-      <h1>중복여부 : ${DuplicateLogin }</h1>
-    </div>
- --%>  
 
-  
+  <main>
+
   
   
   <div id="gomodal"></div>
@@ -299,7 +290,10 @@
   </style>
   
     <div class="wrapper">
+    <form action="${pageContext.request.contextPath}/game_puzzle" method="post" id="recorForm">
         <p class="play-time">0</p>
+    <input id="playTimeInput"type="hidden" name="playTime" value="">
+    </form>
         <ul class="image-container">
             <li class="list0" data-type="0" draggable="true"></li>
             <li class="list1" data-type="1" draggable="true"></li>
@@ -339,6 +333,15 @@
 	    let time = 0;
 	
 	
+	    function gameComplete() {
+	        const playTimeValue = document.querySelector(".play-time").innerText;
+	        const hiddenInput = document.querySelector("#playTimeInput");
+	        
+	        hiddenInput.value = playTimeValue;
+
+	        document.querySelector("#recorForm").submit();
+	    }
+	    
 	    const dragged = {
 	        el: null, 
 	        class: null,
@@ -370,8 +373,9 @@
 	        })
 	        if(unMatched.length === 0){
 	            isPlaying = false;
-	            clearInterval(timeInterval)
-	            gameText.style.display = "block"
+	            clearInterval(timeInterval);
+	            gameText.style.display = "block";
+	            	   gameComplete();
 	        }
 	    }
 	
@@ -461,7 +465,11 @@
 
     }, true)
     
-    
+     if(<%=username%>==null){
+ 	   alert("로그인 후 시작하실 수 있습니다.");
+ 	   
+ 	   setTimeout(function(){modalOn();},500);
+    }
     </script>
     <script>
     

@@ -3,6 +3,7 @@ package middleteamproject.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import middleteamproject.dao.GamesDAO;
 import middleteamproject.dao.MemberDAO;
 
 public class MembersaveCommand implements Command{
@@ -16,7 +17,9 @@ public class MembersaveCommand implements Command{
 	 
 	 MemberDAO joinMember = new MemberDAO();
 	 joinMember.saveMember(userId, userPw, name);
-	 return "/";
+	 GamesDAO gameRecord = new GamesDAO();
+	 gameRecord.createRecord(userId);
+	 return "/home";
 	}
 
 }

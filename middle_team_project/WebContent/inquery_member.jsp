@@ -184,6 +184,14 @@
 					<strong>${ranking}위</strong>
 				</h2>
 			</div>
+			퍼즐 기록 :
+
+			<div id="game2Info"
+				class=" mb-5 pb-3 d-flex flex-row align-items-center"
+				style="margin-left: 30px; border-bottom:1px solid #aaaaaa">
+
+				<h2 style="margin-left:10%;"><strong>${puzzleRecord }</strong></h2>
+			</div>
 			게임2 기록 :
 
 			<div id="game2Info"

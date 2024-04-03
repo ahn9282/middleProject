@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import middleteamproject.dao.AvoidBallDAO;
+import middleteamproject.dao.GamesDAO;
 import middleteamproject.dao.MemberDAO;
 import middleteamproject.dto.AvoidBallDTO;
 import middleteamproject.dto.MemberDTO;
@@ -29,6 +30,11 @@ public class MemberInqueryCommand implements Command {
         int ranking = player.showRanking(userId);
         request.setAttribute("toprecord", toprecord.getPlayerRecord());
         request.setAttribute("ranking", ranking);
+        
+        GamesDAO games = new GamesDAO();
+        int puzzleRecord = games.showPuzzleCount(userId);
+        
+        request.setAttribute("puzzleRecord", puzzleRecord);
         
             return "/";
         }

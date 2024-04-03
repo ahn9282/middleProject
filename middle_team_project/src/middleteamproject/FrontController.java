@@ -28,6 +28,7 @@ import middleteamproject.command.MemberInqueryCommand;
 import middleteamproject.command.MemberJoinCommand;
 import middleteamproject.command.MemberModifyCommand;
 import middleteamproject.command.MembersaveCommand;
+import middleteamproject.command.PuzzleCommand;
 
 /**
  * Servlet implementation class FrontController
@@ -217,10 +218,11 @@ public class FrontController extends HttpServlet {
 			methodRedirect(request, response, viewPage);
 
 		}else if (com.equals("/game_puzzle")) {
-			
 			nowUri = com;
-			viewPage = nowUri + ".jsp";
-
+			
+			command = new PuzzleCommand();
+			viewPage = command.process(request, response) +nowUri+".jsp";
+			
 			methodForward(request, response, viewPage);
 
 		}
