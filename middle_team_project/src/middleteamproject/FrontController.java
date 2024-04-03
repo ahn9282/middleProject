@@ -216,6 +216,13 @@ public class FrontController extends HttpServlet {
 			viewPage = command.process(request, response);
 			methodRedirect(request, response, viewPage);
 
+		}else if (com.equals("/game_puzzle")) {
+			
+			nowUri = com;
+			viewPage = nowUri + ".jsp";
+
+			methodForward(request, response, viewPage);
+
 		}
 
 	}

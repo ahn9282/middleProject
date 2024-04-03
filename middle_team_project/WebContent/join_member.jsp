@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -69,8 +69,6 @@
 	top: 12px;
 	left: 250px;
 }
-
-
 </style>
 </head>
 
@@ -94,7 +92,7 @@
 						href="${pageContext.request.contextPath}/game/">조원1</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page"
-						href="${pageContext.request.contextPath }/game/">조원2</a></li>
+						href="${pageContext.request.contextPath }/game_puzzle">퍼즐</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page"
 						href="${pageContext.request.contextPath }/game/">조원3</a></li>
@@ -150,45 +148,49 @@
 	</div>
 
 	<main class="d-flex flex-column align-items-center">
-		<div class="w-50 d-flex justify-content-center"
-			style="height: 500px">
+		<div class="w-50 d-flex justify-content-center" style="height: 500px">
 
 
-				<div
-					class="card card-border d-flex flex-column justify-content-center"
-					id="join_container"
-					style="width: 80%; min-width: 800px; height: 100%">
-					<div class="card-header w-100">
-						<h2>회원 가입: 아이디 조회는 필수적으로 해주세요</h2>
-					</div>
-					<div class="card-body p-3 w-100">
-							<form onsubmit="return CheckID()" action="${pageContext.request.contextPath }/join_member" method="post">
+			<div
+				class="card card-border d-flex flex-column justify-content-center"
+				id="join_container"
+				style="width: 80%; min-width: 800px; height: 100%">
+				<div class="card-header w-100">
+					<h2>회원 가입: 아이디 조회는 필수적으로 해주세요</h2>
+				</div>
+				<div class="card-body p-3 w-100">
+					<form onsubmit="return CheckID()"
+						action="${pageContext.request.contextPath }/join_member"
+						method="post">
 						<div class="d-flex flex-row">
-						<p>id 조회</p>
-						<input type="text" name="showID" value="${validId}" id="veritifyID">
+							<p>id 조회</p>
+							<input type="text" name="showID" value="${validId}"
+								id="veritifyID">
 							<button type="submit" class="btn btn-primary" id="researchId">조회</button>
 						</div>
-							</form>
-			<form action="${pageContext.request.contextPath }/save_member"
-				name="joinForm" method="post" onsubmit="return Checkform()">
+					</form>
+					<form action="${pageContext.request.contextPath }/save_member"
+						name="joinForm" method="post" onsubmit="return Checkform()">
 						<p class="mb-0">닉네임 :</p>
 						<input class="w-100 mx-auto p-3" type="text" name="youname"
 							value="" style="border-radius: 5px;" id="joinNAME">
 						<p class="mb-0">ID :</p>
 						<input class="w-100 mx-auto p-3" type="text" name="userID"
 							value="${validId}" style="border-radius: 5px;" id="joinID">
-							
+
 						<p class="mb-0">비밀번호 :</p>
 						<input class="w-100 mx-auto p-3" type="password" name="userPW"
 							value="" style="border-radius: 5px;" id="joinPW">
-					<div class="card-footer w-100 d-flex flex:row jusitfy-content-center">
-						<button class="btn btn-primary me-auto" type="submit" id="joinBtn">가입</button>
-						<a class="btn btn-secondary" id="closebtn"
-							href="${pageContext.request.contextPath }">취소</a>
-					</div>
-			</form>
-					</div>
+						<div
+							class="card-footer w-100 d-flex flex:row jusitfy-content-center">
+							<button class="btn btn-primary me-auto" type="submit"
+								id="joinBtn">가입</button>
+							<a class="btn btn-secondary" id="closebtn"
+								href="${pageContext.request.contextPath }">취소</a>
+						</div>
+					</form>
 				</div>
+			</div>
 			<script>
 				function Checkform() {
 					let userName = document.getElementById("joinNAME");

@@ -88,7 +88,6 @@
 #boardtable {
 	text-align: center;
 }
-
 </style>
 </head>
 
@@ -120,7 +119,7 @@
 						</li>
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
-							href="${pageContext.request.contextPath }/game/">조원2</a></li>
+							href="${pageContext.request.contextPath }/game_puzzle">퍼즐</a></li>
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
 							href="${pageContext.request.contextPath }/game/">조원3</a></li>
@@ -148,7 +147,8 @@
 						<form action="${pageContext.request.contextPath }/logout"
 							method="get">
 							<div id="on-login d-flex flex-row" class="">
-							<a class="text-white" id="showUserName" href="${pageContext.request.contextPath }/inquery_member">user:<%=username %></a>
+								<a class="text-white" id="showUserName"
+									href="${pageContext.request.contextPath }/inquery_member">user:<%=username%></a>
 								<button class="btn btn-info" id="logoutBtn" type="submit">logout</button>
 							</div>
 						</form>
@@ -199,15 +199,21 @@
 									<td>${board.bGood}</td>
 									<td class="m-0 d-flex flex-row justify-content-center"><c:if
 											test="${userId != null && userId == board.bWriterId}">
-											<form action="${pageContext.request.contextPath }/board_modifyView" method="post">
+											<form
+												action="${pageContext.request.contextPath }/board_modifyView"
+												method="post">
 												<input type="hidden" name="modifyBid" value="${board.bid}">
-												<input type="hidden" name="modifyBtitle" value="${board.bTitle}">
-													 <input type="hidden" name="modifyBcontent" value="${board.bContent}"> 
-													<button type="submit" class="btn btn-warning p-0" id="mdBtn">수정</button>
+												<input type="hidden" name="modifyBtitle"
+													value="${board.bTitle}"> <input type="hidden"
+													name="modifyBcontent" value="${board.bContent}">
+												<button type="submit" class="btn btn-warning p-0" id="mdBtn">수정</button>
 											</form>
-											<form action="${pageContext.request.contextPath }/board_delete" method="post">
+											<form
+												action="${pageContext.request.contextPath }/board_delete"
+												method="post">
 												<input type="hidden" name="deleteBid" value="${board.bid}">
-												<button type="submit" class="btn btn-secondary p-0" id="dlBtn">삭제</button>
+												<button type="submit" class="btn btn-secondary p-0"
+													id="dlBtn">삭제</button>
 											</form>
 										</c:if></td>
 								</tr>
@@ -226,9 +232,11 @@
 						class="container my-3 d-flex flex-row justify-content-center text-center">
 					</div>
 					<div class="card-footer d-flex justify-content-center  ">
-					<c:if test="${userId != null}">
-						<a class="btn btn-primary" id="writeBoardBtn" href="${pageContext.request.contextPath }/board_WriteForm">글 작성</a>
-					</c:if>
+						<c:if test="${userId != null}">
+							<a class="btn btn-primary" id="writeBoardBtn"
+								href="${pageContext.request.contextPath }/board_WriteForm">글
+								작성</a>
+						</c:if>
 					</div>
 				</div>
 

@@ -102,8 +102,6 @@
 #boardUtil {
 	text-align: right;
 }
-
-
 </style>
 </head>
 
@@ -131,11 +129,11 @@
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
-							href="${pageContext.request.contextPath}/game_avoidBall">공피하기게임</a>
+							href="${pageContext.request.contextPath}/game_avoidBall">공피하기</a>
 						</li>
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
-							href="${pageContext.request.contextPath }/game/">조원2</a></li>
+							href="${pageContext.request.contextPath }/game_puzzle">퍼즐</a></li>
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
 							href="${pageContext.request.contextPath }/game/">조원3</a></li>
@@ -163,7 +161,8 @@
 						<form action="${pageContext.request.contextPath }/logout"
 							method="get">
 							<div id="on-login d-flex flex-row" class="">
-								<a class="text-white" id="showUserName" href="${pageContext.request.contextPath }/inquery_member">user:<%=username %></a>
+								<a class="text-white" id="showUserName"
+									href="${pageContext.request.contextPath }/inquery_member">user:<%=username%></a>
 								<button class="btn btn-info" id="logoutBtn" type="submit">logout</button>
 							</div>
 						</form>
@@ -181,30 +180,38 @@
 
 		<div class="container d-flex flex-row w-100" id="contentBoard">
 			<div class="d-flex flex-column w-100">
-			<div class="w-100 text-center" style=" border-bottom:1px solid #cccccc">
-			<h1>글 작성</h1>
-			</div>
-				<form action="board_Write" method="post"onsubmit="return checkNullInput()">
-				<div id="boardtitle" class="w-100 my-3" >
-				
-			제목: 	<input type="text" name="btitle" value="제목" style=" margin-left:1.3em;" placeholder="제목" id="inputTitle"> 
+				<div class="w-100 text-center"
+					style="border-bottom: 1px solid #cccccc">
+					<h1>글 작성</h1>
 				</div>
-				
-				<div id="boardwriter " class="w-100 py-3" style=" border-bottom:1px solid #cccccc" >
-				작성자 : <input type="text" name="bwriter" value="<%=username%>" disabled> 
-				</div>
+				<form action="board_Write" method="post"
+					onsubmit="return checkNullInput()">
+					<div id="boardtitle" class="w-100 my-3">
 
-				
+						제목: <input type="text" name="btitle" value="제목"
+							style="margin-left: 1.3em;" placeholder="제목" id="inputTitle">
+					</div>
 
-				<div id="boardContent" class=" my-5">
-				내용 : <textarea name="bcontent"  style="width:100%; min-height:150px;"id="inputContent">내용</textarea>
-				</div>
-				
-				<button type="submit" class="btn btn-primary" >작성</button>
-				<a class="btn btn-secondary" href="${pageContext.request.contextPath }/board">취소</a>
+					<div id="boardwriter " class="w-100 py-3"
+						style="border-bottom: 1px solid #cccccc">
+						작성자 : <input type="text" name="bwriter" value="<%=username%>"
+							disabled>
+					</div>
+
+
+
+					<div id="boardContent" class=" my-5">
+						내용 :
+						<textarea name="bcontent" style="width: 100%; min-height: 150px;"
+							id="inputContent">내용</textarea>
+					</div>
+
+					<button type="submit" class="btn btn-primary">작성</button>
+					<a class="btn btn-secondary"
+						href="${pageContext.request.contextPath }/board">취소</a>
 				</form>
-			
-				</div>
+
+			</div>
 		</div>
 	</main>
 

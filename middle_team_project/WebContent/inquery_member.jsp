@@ -73,7 +73,7 @@
 
 <body id="game" class="d-flex flex-column justify-content-center vh-300">
 	<%
-	String userId = (String)session.getAttribute("userId");
+		String userId = (String) session.getAttribute("userId");
 		String username = (String) session.getAttribute("username");
 		String isDuplicated = request.getParameter("isDuplicated");
 	%>
@@ -99,7 +99,7 @@
 						</li>
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
-							href="${pageContext.request.contextPath }/game/">조원2</a></li>
+							href="${pageContext.request.contextPath }/game_puzzle">퍼즐</a></li>
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
 							href="${pageContext.request.contextPath }/game/">조원3</a></li>
@@ -147,42 +147,66 @@
 				<h1>회원 정보</h1>
 			</div>
 			Id :
-				<div id="idInfo" class=" mb-5  pb-3 d-flex flex-row align-items-center" style="margin-left:30px;margin-top:20px;border-bottom:1px solid #aaaaaa; ">
-						<h4><%=userId %></h4>
-				</div>
+			<div id="idInfo"
+				class=" mb-5  pb-3 d-flex flex-row align-items-center"
+				style="margin-left: 30px; margin-top: 20px; border-bottom: 1px solid #aaaaaa;">
+				<h4><%=userId%></h4>
+			</div>
 			닉네임 :
-					<form action="${pageContext.request.contextPath }/modify_member" method="post">
-				<div id="nameInfo" class=" mb-5 pb-3 d-flex flex-row align-items-center" style="margin-left:30px; ">
-					<input type="text" name="nameUser" value="${userName }" style="margin-left: 1.3em;"  id="inputTitle">
+			<form action="${pageContext.request.contextPath }/modify_member"
+				method="post">
+				<div id="nameInfo"
+					class=" mb-5 pb-3 d-flex flex-row align-items-center"
+					style="margin-left: 30px;">
+					<input type="text" name="nameUser" value="${userName }"
+						style="margin-left: 1.3em;" id="inputTitle">
 				</div>
-			PW :
-				<div id="pwInfo" class=" mb-5 pb-3 d-flex flex-row align-items-center" style="margin-left:30px; border-bottom:1px solid #aaaaaa;">
-					 <input type="password" name="pwUser" value="${userPw }" style="margin-left: 1.3em;"  id="inputTitle">
-					 <button type="submit" class="btn btn-info my-3">수정</button>(닉네임과 함께 수정됩니다.)
+				PW :
+				<div id="pwInfo"
+					class=" mb-5 pb-3 d-flex flex-row align-items-center"
+					style="margin-left: 30px; border-bottom: 1px solid #aaaaaa;">
+					<input type="password" name="pwUser" value="${userPw }"
+						style="margin-left: 1.3em;" id="inputTitle">
+					<button type="submit" class="btn btn-info my-3">수정</button>
+					(닉네임과 함께 수정됩니다.)
 				</div>
-					 </form>
+			</form>
 			공피하기 기록 :
-				<div id="vallInfo" class=" mb-5 pb-3 d-flex flex-row align-items-center" style="margin-left:30px;border-bottom:1px solid #aaaaaa; ">
+			<div id="vallInfo"
+				class=" mb-5 pb-3 d-flex flex-row align-items-center"
+				style="margin-left: 30px; border-bottom: 1px solid #aaaaaa;">
 
-					 <H3 class="mr-3">최고 기록 :  <strong>${toprecord}</strong></H3>&nbsp&nbsp &nbsp&nbsp<h2><strong>${ranking}위</strong></h2>
-				</div>
+				<H3 class="mr-3">
+					최고 기록 : <strong>${toprecord}</strong>
+				</H3>
+				&nbsp&nbsp &nbsp&nbsp
+				<h2>
+					<strong>${ranking}위</strong>
+				</h2>
+			</div>
 			게임2 기록 :
-				
-				<div id="game2Info" class=" mb-5 pb-3 d-flex flex-row align-items-center" style="margin-left:30px;">
 
-					 <h3>게임 시간 : </h3>
-				</div>
-				<div id="deleteAndBack" class=" mb-5 d-flex flex-row align-items-center justify-content-center" style="margin-left:30px; border-top:1px solid #aaaaaa;">
+			<div id="game2Info"
+				class=" mb-5 pb-3 d-flex flex-row align-items-center"
+				style="margin-left: 30px;">
 
-					 <form action="${pageContext.request.contextPath }/delete_member" method="post">
-					  <button type="submit" class="btn btn-danger my-3">회원 탈퇴</button>
-					  <a href="${pageContext.request.contextPath }/home" class="btn btn-secondary my-3">취소</a>
-					 </form>
-				</div>
-			
-				
+				<h3>게임 시간 :</h3>
+			</div>
+			<div id="deleteAndBack"
+				class=" mb-5 d-flex flex-row align-items-center justify-content-center"
+				style="margin-left: 30px; border-top: 1px solid #aaaaaa;">
 
-			
+				<form action="${pageContext.request.contextPath }/delete_member"
+					method="post">
+					<button type="submit" class="btn btn-danger my-3">회원 탈퇴</button>
+					<a href="${pageContext.request.contextPath }/home"
+						class="btn btn-secondary my-3">취소</a>
+				</form>
+			</div>
+
+
+
+
 		</div>
 
 
@@ -226,7 +250,7 @@
 
   </script>
 
-	
+
 	</main>
 
 	<script>

@@ -105,7 +105,7 @@
 
 #commentblock {
 	overflow: hidden;
-	min-height:8em;
+	min-height: 8em;
 }
 </style>
 </head>
@@ -139,7 +139,7 @@
 						</li>
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
-							href="${pageContext.request.contextPath }/game/">조원2</a></li>
+							href="${pageContext.request.contextPath }/game_puzzle">퍼즐</a></li>
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
 							href="${pageContext.request.contextPath }/game/">조원3</a></li>
@@ -167,7 +167,8 @@
 						<form action="${pageContext.request.contextPath }/logout"
 							method="get">
 							<div id="on-login d-flex flex-row" class="">
-								<a class="text-white" id="showUserName" href="${pageContext.request.contextPath }/inquery_member">user:<%=username %></a>
+								<a class="text-white" id="showUserName"
+									href="${pageContext.request.contextPath }/inquery_member">user:<%=username%></a>
 								<button class="btn btn-info" id="logoutBtn" type="submit">logout</button>
 							</div>
 						</form>
@@ -185,7 +186,9 @@
 
 		<div class="container d-flex flex-row w-100" id="contentBoard">
 			<div class="d-flex flex-column w-100">
-				<div id="boardtitle" class="w-100 "><strong>${selectBoard.bTitle}</strong></div>
+				<div id="boardtitle" class="w-100 ">
+					<strong>${selectBoard.bTitle}</strong>
+				</div>
 				<div id="boardwriter " class="w-100" style="text-align: right;">작성자
 					: ${selectBoard.bWriter}</div>
 
@@ -204,21 +207,23 @@
 
 					<c:if test="${userId != null }">
 						<form id="goodForm"
-							action="${pageContext.request.contextPath}/board_good" method="post">
+							action="${pageContext.request.contextPath}/board_good"
+							method="post">
 							<input type="hidden" name="bidG" value="${selectBoard.bid}">
 							<button type="submit" name="good" class="btn btn-primary"
 								id="goodBtn" value="1">
 								<p>좋아요</p>${selectBoard.bGood}</button>
 						</form>
 						<form id="hateForm"
-							action="${pageContext.request.contextPath}/board_hate" method="post">
-									<input type="hidden" name="bidH" value="${selectBoard.bid}">
+							action="${pageContext.request.contextPath}/board_hate"
+							method="post">
+							<input type="hidden" name="bidH" value="${selectBoard.bid}">
 							<button type="submit" name="hate" class="btn btn-danger"
 								id="hateBtn" value="1">
 								<p>싫어요</p>${selectBoard.bHate}</button>
 						</form>
-						
-						
+
+
 					</c:if>
 					<c:if test="${userId == null }">
 						<button type="submit" name="good" class="btn btn-primary"
@@ -236,19 +241,18 @@
 				<c:if test="${userId != null }">
 
 					<form action="${pageContext.request.contextPath}/comment_write"
-						method="post" id="commentForm w-100" >
+						method="post" id="commentForm w-100">
 						<div id="writeComment" class="w-100 d-flex flex-row ">
-						
-								<input type="hidden" name="bidC" value="${selectBoard.bid}">
+
+							<input type="hidden" name="bidC" value="${selectBoard.bid}">
 							<input type="text" name="commentContent" value=""
 								placeholder="예쁜 댓글 문화를 만듭시다."
 								style="width: 90%; min-height: 100px; border-radius: 15px; margin-bottom: 60px;">
-								
+
 							<div>
-							
-								<button type="submit"  name="good"
-									class="btn btn-secondary" id="commentBtn"
-									style="min-height: 100px;">댓글 달기</button>
+
+								<button type="submit" name="good" class="btn btn-secondary"
+									id="commentBtn" style="min-height: 100px;">댓글 달기</button>
 							</div>
 						</div>
 					</form>
@@ -265,12 +269,14 @@
 							</div>
 							<div style="padding-right: 5%; padding-left: 5%;">${comment.cContent }</div>
 							<p class="d-flex flex-row w-100"
-								style="text-align: right; padding-right: 5%; ">
+								style="text-align: right; padding-right: 5%;">
 								<c:if test="${userId != null }">
 									<form action="comment_like" method="post">
-										<input type="hidden" name="commentBelong" value="${selectBoard.bid}">
-										<input type="hidden" name="commentCont" value="${comment.cContent}">
-										<input type="hidden" name="commentReco" value="${comment.crecommand}">
+										<input type="hidden" name="commentBelong"
+											value="${selectBoard.bid}"> <input type="hidden"
+											name="commentCont" value="${comment.cContent}"> <input
+											type="hidden" name="commentReco"
+											value="${comment.crecommand}">
 										<button type="submit" name="commentRBtn" style="padding: 0;"
 											class="btn btn-warning">★</button>
 										추천 수 : ${ comment.crecommand}

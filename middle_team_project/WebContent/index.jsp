@@ -94,7 +94,7 @@
               <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/game_avoidBall">공피하기</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath }/game/">조원2</a>
+              <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath }/game_puzzle">퍼즐</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath }/game/">조원3</a>
