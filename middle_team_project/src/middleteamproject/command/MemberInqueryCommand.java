@@ -9,7 +9,6 @@ import middleteamproject.dao.GamesDAO;
 import middleteamproject.dao.MemberDAO;
 import middleteamproject.dto.AvoidBallDTO;
 import middleteamproject.dto.MemberDTO;
-import middleteamproject.SessionListener; 
 
 public class MemberInqueryCommand implements Command {
 

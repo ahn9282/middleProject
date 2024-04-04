@@ -24,7 +24,7 @@ public class PuzzleCommand implements Command {
 		String userId = (String)session.getAttribute("userId");
 		GamesDAO puzzle = new GamesDAO();
 		int record = puzzle.showPuzzleCount(userId);
-		
+		if(record==0)record=12345;
 		if(countResult < record && countResult!=0) {
 			puzzle.brakingCountPuzzle(userId, countResult);
 			
