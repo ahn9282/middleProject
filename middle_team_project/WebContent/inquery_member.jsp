@@ -102,10 +102,10 @@
 							href="${pageContext.request.contextPath }/game_puzzle">퍼즐</a></li>
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
-							href="${pageContext.request.contextPath }/game/">조원3</a></li>
+							href="${pageContext.request.contextPath }/game_rsp">가위바위보</a></li>
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
-							href="${pageContext.request.contextPath }/game/">조원4</a></li>
+							href="${pageContext.request.contextPath }/asd">아바타 채팅</a></li>
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page"
 							href="${pageContext.request.contextPath }/board">게시판</a></li>
@@ -188,9 +188,11 @@
 
 			<div id="game2Info"
 				class=" mb-5 pb-3 d-flex flex-row align-items-center"
-				style="margin-left: 30px; border-bottom:1px solid #aaaaaa">
+				style="margin-left: 30px; border-bottom: 1px solid #aaaaaa">
 
-				<h2 style="margin-left:10%;"><strong>${puzzleRecord } 초</strong></h2>
+				<h2 style="margin-left: 10%;">
+					<strong>${puzzleRecord } 초</strong>
+				</h2>
 			</div>
 			게임2 기록 :
 

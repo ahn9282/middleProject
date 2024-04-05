@@ -67,15 +67,16 @@ public class FrontController extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		if ((String) session.getAttribute("userId") != null) {
-			// session에서 userId 꺼내오기
+			// session에서 userId 꺼내와 로그인일 경우 해당 if문을 거치도록
 			String userId = (String) session.getAttribute("userId");
 			String sessionId = session.getId();
 			SessionListener sessionListener = new SessionListener();
+			//검사를 위한 sessionListener생성과 sessionId 호출
 			if (!sessionListener.checkValidSessionId(userId, sessionId) && com != "/check_member") {
-
+				//sessionListener에서 해당 Id와 sessionId가 일치 하지 않고 로그인 과정이 아닐 시
 				session.invalidate(); // 세션 무효화
 				response.sendRedirect(request.getContextPath() + "/duplicated_member");
-				return;
+				return;//
 			}
 		}
 
@@ -229,7 +230,8 @@ public class FrontController extends HttpServlet {
 
 	}
 
-	protected void methodForward(HttpServletRequest request, HttpServletResponse response, String viewPage) {
+	protected void methodForward(HttpServletRequest request, 
+								HttpServletResponse response, String viewPage) {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 
 		try {
@@ -240,7 +242,8 @@ public class FrontController extends HttpServlet {
 		}
 	}
 
-	protected void methodRedirect(HttpServletRequest request, HttpServletResponse response, String viewPage) {
+	protected void methodRedirect(HttpServletRequest request, 
+								HttpServletResponse response, String viewPage) {
 		String redirectUri = request.getContextPath() + viewPage;
 		try {
 			response.sendRedirect(redirectUri);
