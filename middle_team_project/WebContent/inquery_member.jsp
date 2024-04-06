@@ -52,6 +52,7 @@
 	width: 30%;
 	height: 50%;
 	overflow: hidden;
+	min-width:350px;
 }
 
 #loginID, #loginPW {
