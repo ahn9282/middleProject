@@ -534,7 +534,7 @@ main {
             
                 $result.appendChild(resultSpan);
                 $result.appendChild($br);
-                if((Number(${topRecord})+1) <result){
+                if((Number(${topRecord})) <result){
                 	resultSpan.textContent ="결과 : " + result + "ms"+" 갱신!!";
             $recordBtn.style.display = "flex";
                 }

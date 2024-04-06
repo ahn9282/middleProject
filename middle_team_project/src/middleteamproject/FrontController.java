@@ -74,7 +74,7 @@ public class FrontController extends HttpServlet {
 			//검사를 위한 sessionListener생성과 sessionId 호출
 			if (!sessionListener.checkValidSessionId(userId, sessionId) && com != "/check_member") {
 				//sessionListener에서 해당 Id와 sessionId가 일치 하지 않고 로그인 과정이 아닐 시
-				session.invalidate(); // 세션 무효화
+				session.invalidate(); // 세션 무효화 후 즉시 "/duplicated_member"로 리다이렉트
 				response.sendRedirect(request.getContextPath() + "/duplicated_member");
 				return;//
 			}
@@ -93,11 +93,6 @@ public class FrontController extends HttpServlet {
 			nowUri = com;
 			methodForward(request, response, viewPage);
 
-		} else if (com.equals("/duplicated_member")) {
-			request.setAttribute("isDuplicated", "Y");
-			viewPage = "/home";
-
-			methodForward(request, response, viewPage);
 
 		} else if (com.equals("/join_member")) {
 
@@ -121,10 +116,16 @@ public class FrontController extends HttpServlet {
 
 		} else if (com.equals("/logout")) {
 			command = new LogOutCommand();
-			viewPage = command.process(request, response);
+			viewPage = command.process(request, response)+nowUri;
 
-			methodRedirect(request, response, nowUri);
+			methodRedirect(request, response, viewPage);
 
+		} else if (com.equals("/duplicated_member")) {
+			request.setAttribute("isDuplicated", "Y");
+			viewPage = "/home";
+			//중복되었음을 알리고 홈페이지로 즉시 리다이렉트
+			methodForward(request, response, viewPage);
+			
 		} else if (com.equals("/game_avoidBall")) {
 			command = new GameAvoidBallCommand();
 			viewPage = command.process(request, response);

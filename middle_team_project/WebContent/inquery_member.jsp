@@ -153,24 +153,25 @@
 				<h4><%=userId%></h4>
 			</div>
 			닉네임 :
-			<form action="${pageContext.request.contextPath }/modify_member"
-				method="post">
-				<div id="nameInfo"
-					class=" mb-5 pb-3 d-flex flex-row align-items-center"
+			<form action="${pageContext.request.contextPath }/modify_member" method="post">
+				<div id="nameInfo" class=" mb-5 pb-3 d-flex flex-row align-items-center"
 					style="margin-left: 30px;">
+					
 					<input type="text" name="nameUser" value="${userName }"
 						style="margin-left: 1.3em;" id="inputTitle">
 				</div>
 				PW :
-				<div id="pwInfo"
-					class=" mb-5 pb-3 d-flex flex-row align-items-center"
+				<div id="pwInfo" class=" mb-5 pb-3 d-flex flex-row align-items-center"
 					style="margin-left: 30px; border-bottom: 1px solid #aaaaaa;">
+					
 					<input type="password" name="pwUser" value="${userPw }"
 						style="margin-left: 1.3em;" id="inputTitle">
+						
 					<button type="submit" class="btn btn-info my-3">수정</button>
 					(닉네임과 함께 수정됩니다.)
 				</div>
 			</form>
+			
 			공피하기 기록 :
 			<div id="vallInfo"
 				class=" mb-5 pb-3 d-flex flex-row align-items-center"
