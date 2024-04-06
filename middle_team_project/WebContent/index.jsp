@@ -67,8 +67,16 @@
       left: 250px;
 
     }
-   
-    
+	@font-face {
+	    font-family: 'NeoDunggeunmo';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	#title { 
+	    font-family: "NeoDunggeunmo", Verdana, Tahoma;
+	    color: green;
+	}	   
   </style>
 </head>
 
@@ -80,7 +88,9 @@
   %>
   <header class="d-flex flex-column">
   <form action="${pageContext.request.contextPath}/home" method="post">
-    <button id="home" class="d-flex flex-column justify-content-center align-items-center" >웹게임천국</button>
+    <button id="home" class="d-flex flex-column justify-content-center align-items-center" >
+		<h1 id="title" class="display-1 fw-bold">웹게임천국</h1>
+    </button>
   </form>
     <nav class="navbar navbar-expand-lg bg-body" data-bs-theme="dark">
       <div class="container-fluid">
@@ -131,6 +141,116 @@
     </nav>
   </header>
   <main>
+    <div class="container" style="text-align: center">
+      <div
+        id="carouselExampleCaptions"
+        class="carousel carousel-dark slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="3"
+            aria-label="Slide 4"
+          ></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              src="https://github.com/KeyvanOh/kdt/blob/main/game%20screenshot/g1.png?raw=true"
+              class="w-50"
+              id="game-image-1"
+            />
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="https://github.com/KeyvanOh/kdt/blob/main/game%20screenshot/g2.png?raw=true"
+              class="w-50"
+              id="game-image-2"
+            />
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="https://github.com/KeyvanOh/kdt/blob/main/game%20screenshot/g3.png?raw=true"
+              class="w-50"
+              id="game-image-3"
+            />
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="https://github.com/KeyvanOh/kdt/blob/main/game%20screenshot/g4.png?raw=true"
+              class="w-50"
+              id="game-image-4"
+            />
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+
+
+	  <script>
+	    $("#game-image-1").click(function () {
+	      window.location.replace("${pageContext.request.contextPath }/game_avoidBall");
+	    });
+	    $("#game-image-2").click(function () {
+	      window.location.replace("${pageContext.request.contextPath }/game_puzzle");
+	    });
+	    $("#game-image-3").click(function () {
+	      window.location.replace("${pageContext.request.contextPath }/game_rsp");
+	    });
+	    $("#game-image-4").click(function () {
+	      window.location.replace("${pageContext.request.contextPath }/asd");
+	    });
+	  </script>  
+  </main>
   <div id="gomodal"></div>
   <div id="modal" class="modal-overlay">
 
@@ -243,7 +363,7 @@
   </script>
   
    
-  </main>
+  
 
   <script>
     function clock() {
