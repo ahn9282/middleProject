@@ -69,6 +69,16 @@
 	top: 12px;
 	left: 250px;
 }
+	@font-face {
+	    font-family: 'NeoDunggeunmo';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	#title { 
+	    font-family: "NeoDunggeunmo", Verdana, Tahoma;
+	    color: green;
+	}
 </style>
 </head>
 
@@ -81,7 +91,9 @@
 	<header class="d-flex flex-column">
 		<form action="${pageContext.request.contextPath}/home" method="post">
 			<button id="home"
-				class="d-flex flex-column justify-content-center align-items-center">웹게임천국</button>
+				class="d-flex flex-column justify-content-center align-items-center">
+				<h1 id="title" class="display-1 fw-bold">웹게임천국</h1>
+			</button>
 		</form>
 		<nav class="navbar navbar-expand-lg bg-body" data-bs-theme="dark">
 			<div class="container-fluid">
