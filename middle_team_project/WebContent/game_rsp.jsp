@@ -165,23 +165,23 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/game_avoidBall">공피하기</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath }/game/">조원2</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath }/game/">조원3</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath }/game/">조원4</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page"
-                href="${pageContext.request.contextPath }/board">게시판</a>
-            </li>
-          </ul>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page"
+							href="${pageContext.request.contextPath}/game_avoidBall">공피하기</a>
+						</li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page"
+							href="${pageContext.request.contextPath }/game_puzzle">퍼즐</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page"
+							href="${pageContext.request.contextPath }/game_rsp">가위바위보</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page"
+							href="${pageContext.request.contextPath }/asd">아바타 채팅</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page"
+							href="${pageContext.request.contextPath }/board">게시판</a></li>
+					</ul>
             <span id="time" class="text-white m-2 p-0" style="min-width:100px"></span>
             <div id="dashboard" class="d-flex flex-row justify-content-center align-items-center">
           <% if(username == null){ %>
@@ -193,7 +193,8 @@
           <%}else{ %>
           <form action="${pageContext.request.contextPath }/logout" method="get">
           <div id="on-login d-flex flex-row" class="">
-          <p class="text-white" id="showUserName">user:<%=username %></p>
+          <a class="text-white" id="showUserName"
+									href="${pageContext.request.contextPath }/inquery_member">user:<%=username%></a>
           <button class="btn btn-info" id="logoutBtn" type="submit">logout</button>   
           </div>
           </form>

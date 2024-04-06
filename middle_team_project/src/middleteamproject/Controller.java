@@ -34,11 +34,11 @@ import middleteamproject.command.PuzzleCommand;
  * Servlet implementation class FrontController
  */
 @WebServlet("/")
-public class FrontController extends HttpServlet {
+public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static String nowUri = "/";
 
-	public FrontController() {
+	public Controller() {
 
 	}
 
@@ -227,7 +227,12 @@ public class FrontController extends HttpServlet {
 			
 			methodForward(request, response, viewPage);
 
-		}
+		}else if (com.equals("/game_rsp")) {
+	         nowUri = com;
+	         viewPage = com + ".jsp";
+	         
+	          methodForward(request, response, viewPage);
+	      }
 
 	}
 
