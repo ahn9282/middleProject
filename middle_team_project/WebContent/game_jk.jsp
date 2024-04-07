@@ -397,7 +397,7 @@
             async: false,
             success: function (resultData) {
             	console.log("s1");
-            	console.log(resultData);
+            	//console.log(resultData);
 
                 //console.log("member_id: " + $(this).find("member_id").text());
                 //console.log("member_id: " + $(resultData).find("member_id").text());
@@ -448,7 +448,7 @@
 </script>
 
 
-<script src="https://cdn.jsdelivr.net/gh/KeyvanOh/kdt@latest/test22.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/KeyvanOh/kdt@latest/test27.js"></script>
 
 
 
@@ -489,7 +489,7 @@
     
     setInterval(function() {
     	$(".otherCharacter").css("top", sin * 8 + "px");
-    	//console.log(data);
+    	//data);
     	
     	
         $(".otherCharacter").parent().css("background", "none");
@@ -503,6 +503,115 @@
                 
         		let grid = $(".grid" + character_data.find("from_where").text());
         		let characterImage = $('<img class="otherCharacter" src="" />');
+        		//let characterImage;
+        		
+        		
+        		
+        		
+    			switch(character_data.find("model_number").text()) {
+					case "1": {
+						if (hundrend_from_one_second <= 0.25) {
+							characterImage.attr("src", character_1_0);
+						} else if (hundrend_from_one_second <= 0.5) {
+							characterImage.attr("src", character_1_1);
+						} else if (hundrend_from_one_second <= 0.75) {
+							characterImage.attr("src", character_1_2);
+						} else {
+							characterImage.attr("src", character_1_3);
+						}
+						break;
+					}
+					case "2": {
+						if (hundrend_from_one_second <= 0.25) {
+							characterImage.attr("src", character_2_0);
+						} else if (hundrend_from_one_second <= 0.5) {
+							characterImage.attr("src", character_2_1);
+						} else if (hundrend_from_one_second <= 0.75) {
+							characterImage.attr("src", character_2_2);
+						} else {
+							characterImage.attr("src", character_2_3);
+						}
+						break;
+					}
+					case "3": {
+						if (hundrend_from_one_second <= 0.25) {
+							characterImage.attr("src", character_3_0);
+						} else if (hundrend_from_one_second <= 0.5) {
+							characterImage.attr("src", character_3_1);
+						} else if (hundrend_from_one_second <= 0.75) {
+							characterImage.attr("src", character_3_2);
+						} else {
+							characterImage.attr("src", character_3_3);
+						}
+						break;
+					}
+					case "4": {
+						if (hundrend_from_one_second <= 0.25) {
+							characterImage.attr("src", character_4_0);
+						} else if (hundrend_from_one_second <= 0.5) {
+							characterImage.attr("src", character_4_1);
+						} else if (hundrend_from_one_second <= 0.75) {
+							characterImage.attr("src", character_4_2);
+						} else {
+							characterImage.attr("src", character_4_3);
+						}
+						break;
+					}
+					default: {
+						if (hundrend_from_one_second <= 0.25) {
+							characterImage.attr("src", character_mary_0);
+						} else if (hundrend_from_one_second <= 0.5) {
+							characterImage.attr("src", character_mary_1);
+						} else if (hundrend_from_one_second <= 0.75) {
+							characterImage.attr("src", character_mary_3);
+						} else {
+							characterImage.attr("src", character_mary_2);
+						}
+					}
+				}
+        		
+        		
+        		/*
+        		if(character_data.find("model_number").text() == "1") &&  {
+        			characterImage.css("transform", "scaleX(-1)");
+        			
+        		};
+        		*/
+        		
+        		/*
+        		if (Math.floor(hundrend_from_one_second * 100) % 20 == 0) {
+        			
+        			switch(character_data.find("model_number").text()) {
+        				case "1": {
+        			        if (characterImage.attr("src") == character_1_0) {
+        			            characterImage.attr("src", character_1_1);
+        			        } else if (characterImage.attr("src") == character_1_1) {
+        			            characterImage.attr("src", character_1_3);
+        			        } else if (characterImage.attr("src") == character_1_3) {
+        			            characterImage.attr("src", character_1_2);
+        			        } else {
+        			            characterImage.attr("src", character_1_0);
+        			        };
+        					"smile");
+        					console.log(characterImage.attr("src"));
+        					break;
+        				}
+        				default: {
+        			        if (characterImage.attr("src") == character_mary_0) {
+        			            characterImage.attr("src", character_mary_1);
+        			        } else if (characterImage.attr("src") == character_mary_1) {
+        			            characterImage.attr("src", character_mary_3);
+        			        } else if (characterImage.attr("src") == character_mary_3) {
+        			            characterImage.attr("src", character_mary_2);
+        			        } else {
+        			            characterImage.attr("src", character_mary_0);
+        			        };
+        			        console.log(characterImage.attr("src"));
+        					console.log("MS");
+        				}
+        			}
+        		}
+         		*/
         		
         		if(character_data.find("is_flip").text() == "1") {
         			//console.log(character_data.find("member_id").text() + " is flipped now.");
@@ -638,7 +747,7 @@
                     }
                    	//$('<img class="otherCharacter" src="" />').appendTo(grid)
                    	characterImage.appendTo(grid)
-                   		.attr("src", $("#characterBox>img").attr("src"))
+                   		//.attr("src", $("#characterBox>img").attr("src"))
                    		.css("position", "absolute")
                    		//.css("left", "0px")
                    		//.css("left", "10px")
@@ -670,7 +779,7 @@
                     }
                    	//$('<img class="otherCharacter" src="" />').appendTo(grid)
                    	characterImage.appendTo(grid)
-                   		.attr("src", $("#characterBox>img").attr("src"))
+                   		//.attr("src", $("#characterBox>img").attr("src"))
                    		.css("position", "absolute")
                    		.css("left", "0px")
                    		//.css("top", sin * 8 + "px");
@@ -727,7 +836,7 @@
                 async: false,
                 success: function (resultData) {
                     console.log("s");
-                    console.log(resultData);
+                    //console.log(resultData);
                     data = resultData;
                     
                     $(".otherCharacter").parent().css("background", "none");
@@ -780,7 +889,7 @@
                             }
                             
                            	$('<img class="otherCharacter" src="" />').appendTo(grid)
-                           		.attr("src", $("#characterBox>img").attr("src"))
+                           		//.attr("src", $("#characterBox>img").attr("src"))
                            		.css("position", "absolute")
                            		.css("left", "0px")
                            		.css("top", sin * 8 + "px");
@@ -802,7 +911,7 @@
                     console.log("e");
                 }
             });
-
+			/*
             console.log(userId);
         	
             console.log("------------------");
@@ -819,8 +928,7 @@
             console.log("is_chaton: " + is_chaton);
             console.log("chat_text: " + chat_text);
             console.log("is_jump: " + is_jump);    		
-    		
-    		
+    		*/
     		
     		
     		
@@ -833,6 +941,20 @@
     		
     		hundrend_from_one_second -= 1.0;
     	} else {
+            //console.log(Math.floor(hundrend_from_one_second * 1000) % 20);
+            //console.log(Math.floor(hundrend_from_one_second * 100));
+            //console.log(Math.floor(hundrend_from_one_second * 100) % 20);
+            //console.log(hundrend_from_one_second * 100);
+            
+            /*
+            if (Math.floor(hundrend_from_one_second * 100) % 20 == 0) {
+            	
+            	
+            	//console.log("image");
+            	
+            }
+            */
+    		
     		hundrend_from_one_second += 0.01;
     	}
         
@@ -840,7 +962,7 @@
     }, 10);
     
     setInterval(function() {
-        $(".otherCharacter").attr("src", $("#characterBox>img").attr("src"));
+        //$(".otherCharacter").attr("src", $("#characterBox>img").attr("src"));
     }, 200);
   });
 </script>
