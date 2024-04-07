@@ -111,7 +111,7 @@
               <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath }/game_rsp">가위바위보</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath }/asd">아바타 채팅</a>
+              <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath }/jk/game.do">아바타 채팅</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page"
@@ -247,7 +247,7 @@
 	      window.location.replace("${pageContext.request.contextPath }/game_rsp");
 	    });
 	    $("#game-image-4").click(function () {
-	      window.location.replace("${pageContext.request.contextPath }/asd");
+	      window.location.replace("${pageContext.request.contextPath }/jk/game.do");
 	    });
 	  </script>  
   </main>
