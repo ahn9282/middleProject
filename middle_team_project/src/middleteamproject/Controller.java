@@ -36,7 +36,7 @@ import middleteamproject.command.PuzzleCommand;
 @WebServlet("/")
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static String nowUri = "/home";
+	public static String nowUri = "/home";
 
 	public Controller() {
 
