@@ -10,7 +10,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class GamesDAO {
-	
+
 	DataSource dataSource = null;
 
 	public GamesDAO() {
@@ -21,6 +21,7 @@ public class GamesDAO {
 			e.printStackTrace();
 		}
 	}
+
 	public void createRecord(String userId) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -49,6 +50,7 @@ public class GamesDAO {
 			}
 		}
 	}
+
 	public void deleteRecord(String userId) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -76,23 +78,24 @@ public class GamesDAO {
 			}
 		}
 	}
+
 	public int showPuzzleCount(String userId) {
 		int puzzleRecord = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		String sql = " select countPuzzle from gameRecord where pid = ?";
-		
+
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
-		rs = pstmt.executeQuery();
-		
-		if(rs.next()) {
-			puzzleRecord = rs.getInt("countPuzzle");
-		}
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				puzzleRecord = rs.getInt("countPuzzle");
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,8 +114,8 @@ public class GamesDAO {
 		}
 		return puzzleRecord;
 	}
-	
-	public void brakingCountPuzzle(String userId ,int countResult) {
+
+	public void brakingCountPuzzle(String userId, int countResult) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -125,6 +128,36 @@ public class GamesDAO {
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void createChat(String userId, String name) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "insert into character_on_map values (  ?, 0, 0,?, 0, 0, 0, 0, 0,  0, 0, '', 0)";
+
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, name);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {

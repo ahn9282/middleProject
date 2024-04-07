@@ -49,7 +49,6 @@ public class GameController extends HttpServlet {
 		//int gridNumberHeavy = Integer.parseInt(request.getParameter("gridNumberHeavy"));
 
 		
-
 		
 		
 		

@@ -20,6 +20,7 @@ public class MembersaveCommand implements Command{
 	 //DB 내 member Table에 회원 저장
 	 GamesDAO gameRecord = new GamesDAO();
 	 gameRecord.createRecord(userId);
+	 gameRecord.createChat(userId, name);
 	 //DB 내 Games Table에 default값 0 으로 회원 저장
 	 return "/home";
 	}
