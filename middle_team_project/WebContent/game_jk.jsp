@@ -477,11 +477,15 @@
 
     let hundrend_from_one_second = 0;
     	
-    	
+    /*	
     setInterval(function() {
         //let tile_number_from_where = 0;
 
     }, 1000);
+    */
+    
+    let h = 0;
+    let v = 0;
     
     setInterval(function() {
     	$(".otherCharacter").css("top", sin * 8 + "px");
@@ -497,8 +501,73 @@
         	if (member_id == character_data.find("member_id").text()) {
         	} else {
                 
+        		let grid = $(".grid" + character_data.find("from_where").text());
+        		let characterImage = $('<img class="otherCharacter" src="" />');
+        		
+        		if(character_data.find("is_flip").text() == "1") {
+        			//console.log(character_data.find("member_id").text() + " is flipped now.");
+        			//characterImage.css("transform", "scaleX(-1)");
+        			//grid.css("transform", "scaleX(-1)");
+        			characterImage.css("transform", "scaleX(-1)");
+        			
+        		};
+        		
+        		/*
+       	      if (jump) {
+       	          h -= v;
+       	          t += 0.01;
+       	          v -= t;
+       	          if (h >= 0) {
+       	            h = 0;
+       	            jump = false;
+       	            is_jump = 0;
+       	          }
+       	        }
+        		*/
+        		
+        		let top_base = sin * 8;
+        		
+        		if(character_data.find("is_jump").text() == "1") {
+        			//characterImage.css("transform", "scaleX(-1)");
+        			
+        			/*
+        			if (h == 0) {
+        				//v = V;
+        				v = 16;
+        				h -= v;
+        			} else if (h > 0){
+        				h -= v;
+        				v -= hundrend_from_one_second;
+        			} else {
+        				h = 0;
+        			}
+        			*/
+        			if (h == 0 && v < V) {
+        				v = V;
+        				h -= v;
+        			} else if(h < 0) {
+        				v -= hundrend_from_one_second;
+        				h -= v;
+        			} else {
+        				h = 0;
+        			}
+        			
+        			top_base += h;
+        			
+        			
+        			
+        			//console.log("h: " + h);
+        			//console.log("v: " + v);
+        			//console.log("hundrend_from_one_second: " + hundrend_from_one_second);
+        			
+        		};
+        		
+        		
+        		
+        		
+        		
         		if (character_data.find("from_where").text() != character_data.find("tile_number").text()) {
-        			let grid = $(".grid" + character_data.find("from_where").text());
+        			//let grid1 = $(".grid" + character_data.find("from_where").text());
         			let grid2 = $(".grid" + character_data.find("tile_number").text());
         			let chat_text_here = character_data.find("chat_text").text();
         			
@@ -561,51 +630,61 @@
                     
                    
                     //let grid3 = $(".grid" + character_data.find("tile_number").text());
-                    let grid3 = $(".grid" + character_data.find("from_where").text());
-                    if (grid3.css("background") == "none") {
+                    //let grid3 = $(".grid" + character_data.find("from_where").text());
+                    if (grid.css("background") == "none") {
                     	//grid3.css("background", "blue");
-                    	grid3.css("background", "yellow");
+                    	grid.css("background", "yellow");
                         //grid.css("background", "red");
                     }
-                   	$('<img class="otherCharacter" src="" />').appendTo(grid3)
+                   	//$('<img class="otherCharacter" src="" />').appendTo(grid)
+                   	characterImage.appendTo(grid)
                    		.attr("src", $("#characterBox>img").attr("src"))
                    		.css("position", "absolute")
                    		//.css("left", "0px")
                    		//.css("left", "10px")
                    		.css("left", left_dif * hundrend_from_one_second + "px")
                    		//.css("top", sin * 8 + "px");
-                   		.css("top", sin * 8 + top_dif * hundrend_from_one_second + "px");
+                   		//.css("top", sin * 8 + top_dif * hundrend_from_one_second + "px");
+                   		//.css("top", sin * 8 + top_dif * hundrend_from_one_second + h + "px");
+                   		.css("top", top_base + top_dif * hundrend_from_one_second + "px");
                    	//let chat_text_here = character_data.find("chat_text").text();
     				if (chat_text_here != "null") {
-                       	$('<p class="otherChat"></p>').appendTo(grid3)
+                       	$('<p class="otherChat"></p>').appendTo(grid)
                    		.css("color", "white")
                    		.css("position", "absolute")
                    		//.css("left", "0px")
                    		//.css("top", sin * 8 + "px")
                    		.css("left", left_dif * hundrend_from_one_second + "px")
-                   		.css("top", sin * 8 + top_dif * hundrend_from_one_second + "px")
+                   		//.css("top", sin * 8 + top_dif * hundrend_from_one_second + "px")
+                   		//.css("top", sin * 8 + top_dif * hundrend_from_one_second + h + "px")
+                   		.css("top", top_base + top_dif * hundrend_from_one_second + "px")
                    		.text(chat_text_here);                        		
                     }; 
         			
         		} else {
         			
-                    let grid = $(".grid" + character_data.find("from_where").text());
+                    //let grid = $(".grid" + character_data.find("from_where").text());
                     if (grid.css("background") == "none") {
                         grid.css("background", "blue");
                         //grid.css("background", "red");
                     }
-                   	$('<img class="otherCharacter" src="" />').appendTo(grid)
+                   	//$('<img class="otherCharacter" src="" />').appendTo(grid)
+                   	characterImage.appendTo(grid)
                    		.attr("src", $("#characterBox>img").attr("src"))
                    		.css("position", "absolute")
                    		.css("left", "0px")
-                   		.css("top", sin * 8 + "px");
+                   		//.css("top", sin * 8 + "px");
+                   		//.css("top", sin * 8 + h + "px");
+                   		.css("top", top_base + "px");
                    	let chat_text_here = character_data.find("chat_text").text();
     				if (chat_text_here != "null") {
                        	$('<p class="otherChat"></p>').appendTo(grid)
                    		.css("color", "white")
                    		.css("position", "absolute")
                    		.css("left", "0px")
-                   		.css("top", sin * 8 + "px")
+                   		//.css("top", sin * 8 + "px")
+                   		//.css("top", sin * 8 + h + "px")
+                   		.css("top", top_base + "px")
                    		.text(chat_text_here);                        		
                     };         			
         		}
