@@ -319,92 +319,17 @@
         let chat_text_text = "";
         let is_jump_text = "";
         
-        
-        /*
-        let returnCharacter = function(id) {
-        	//let a = "";
-        	var a = "";
-            $.ajax({
-                type: "post",
-                url: "jk.controller.GameController",
-                data: {
-                    eventNumber: 1,
-                	//member_id: userId,
-                	member_id: id,
-                },
-                async: false,
-                success: function (resultData) {
-                	console.log("s1");
-                	console.log(resultData);
-                    
-                    member_id_text = $(resultData).find("member_id").text();
-                    timestamp_latest_text = $(resultData).find("timestamp_latest").text();
-                    timestamp_first_text = $(resultData).find("timestamp_first").text();
-                    member_name_text = $(resultData).find("member_name").text();
-                    model_number_text = $(resultData).find("model_number").text();
-                    map_number_text = $(resultData).find("map_number").text();
-                    tile_number_text = $(resultData).find("tile_number").text();
-                    is_moving_text = $(resultData).find("is_moving").text();
-                    from_where_text = $(resultData).find("from_where").text();
-                    is_flip_text = $(resultData).find("is_flip").text();
-                    is_chaton_text = $(resultData).find("is_chaton").text();
-                    chat_text_text = $(resultData).find("chat_text").text();
-                    is_jump_text = $(resultData).find("is_jump").text();
-                    
-                    console.log("member_id_text: " + member_id_text);
-                    console.log("timestamp_latest_text: " + timestamp_latest_text);
-                    console.log("timestamp_first_text: " + timestamp_first_text);
-                    console.log("member_name_text: " + member_name_text);
-                    console.log("model_number_text: " + model_number_text);
-                    console.log("map_number_text: " + map_number_text);
-                    console.log("tile_number_text: " + tile_number_text);
-                    console.log("is_moving_text: " + is_moving_text);
-                    console.log("from_where_text: " + from_where_text);
-                    console.log("is_flip_text: " + is_flip_text);
-                    console.log("is_chaton_text: " + is_chaton_text);
-                    console.log("chat_text_text: " + chat_text_text);
-                    console.log("is_jump_text: " + is_jump_text);
-                    
-                    console.log(resultData);
-                    //return resultData;
-                    a = resultData;
-                },
-                error: function () {
-                    console.log("e1");
-                }
-            });
-            //return 
-            console.log(a);
-            return a;
-        };
-        
-        //returnCharacter(userId);
-        
-        console.log("returnCharacter: " + returnCharacter(userId));
-        */
-        
-        
         $.ajax({
             type: "post",
             url: "jk.controller.GameController",
             data: {
                 eventNumber: 1,
-                //gridNumberHeavy: gridNumberHeavy,
-                
-            	//member_id: member_id,
             	member_id: userId,
             },
             async: false,
             success: function (resultData) {
             	console.log("s1");
-            	//console.log(resultData);
-
-                //console.log("member_id: " + $(this).find("member_id").text());
-                //console.log("member_id: " + $(resultData).find("member_id").text());
-                
-                
-
-                
+               
                 member_id_text = $(resultData).find("member_id").text();
                 timestamp_latest_text = $(resultData).find("timestamp_latest").text();
                 timestamp_first_text = $(resultData).find("timestamp_first").text();
@@ -432,65 +357,37 @@
                 console.log("is_chaton_text: " + is_chaton_text);
                 console.log("chat_text_text: " + chat_text_text);
                 console.log("is_jump_text: " + is_jump_text);
-                
-                
-                
-                
             },
             error: function () {
                 console.log("e1");
             }
         });        
         
-        
-        
-        
 </script>
 
-
-<script src="https://cdn.jsdelivr.net/gh/KeyvanOh/kdt@latest/test27.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/gh/ahn9282/middleProject@dev_ojh/jk_src/online_avatar_chat.js"></script>
 
 <script>
-
-
-
 
   d.ready(function () {
   	if (username != null) {
     	member_id = userId;
     	member_name = username;
   	};
-	  
-	  
     let count = <%=request.getAttribute("count")%>;
 
     let hereLink = "<%=request.getContextPath()%>" + "/jk/game.do";
 
     let refreshLink = "<%=request.getContextPath()%>" + "/jk/refresh.do";
     let data = "";
-    //let interval = setInterval(function() {
-    	
-    	
-    
 
     let hundrend_from_one_second = 0;
     	
-    /*	
-    setInterval(function() {
-        //let tile_number_from_where = 0;
-
-    }, 1000);
-    */
-    
     let h = 0;
     let v = 0;
     
     setInterval(function() {
     	$(".otherCharacter").css("top", sin * 8 + "px");
-    	//data);
-    	
     	
         $(".otherCharacter").parent().css("background", "none");
         $(".otherCharacter").remove();
@@ -500,13 +397,8 @@
         	let character_data = $(this);
         	if (member_id == character_data.find("member_id").text()) {
         	} else {
-                
         		let grid = $(".grid" + character_data.find("from_where").text());
         		let characterImage = $('<img class="otherCharacter" src="" />');
-        		//let characterImage;
-        		
-        		
-        		
         		
     			switch(character_data.find("model_number").text()) {
 					case "1": {
@@ -570,87 +462,13 @@
 					}
 				}
         		
-        		
-        		/*
-        		if(character_data.find("model_number").text() == "1") &&  {
-        			characterImage.css("transform", "scaleX(-1)");
-        			
-        		};
-        		*/
-        		
-        		/*
-        		if (Math.floor(hundrend_from_one_second * 100) % 20 == 0) {
-        			
-        			switch(character_data.find("model_number").text()) {
-        				case "1": {
-        			        if (characterImage.attr("src") == character_1_0) {
-        			            characterImage.attr("src", character_1_1);
-        			        } else if (characterImage.attr("src") == character_1_1) {
-        			            characterImage.attr("src", character_1_3);
-        			        } else if (characterImage.attr("src") == character_1_3) {
-        			            characterImage.attr("src", character_1_2);
-        			        } else {
-        			            characterImage.attr("src", character_1_0);
-        			        };
-        					"smile");
-        					console.log(characterImage.attr("src"));
-        					break;
-        				}
-        				default: {
-        			        if (characterImage.attr("src") == character_mary_0) {
-        			            characterImage.attr("src", character_mary_1);
-        			        } else if (characterImage.attr("src") == character_mary_1) {
-        			            characterImage.attr("src", character_mary_3);
-        			        } else if (characterImage.attr("src") == character_mary_3) {
-        			            characterImage.attr("src", character_mary_2);
-        			        } else {
-        			            characterImage.attr("src", character_mary_0);
-        			        };
-        			        console.log(characterImage.attr("src"));
-        					console.log("MS");
-        				}
-        			}
-        		}
-         		*/
-        		
         		if(character_data.find("is_flip").text() == "1") {
-        			//console.log(character_data.find("member_id").text() + " is flipped now.");
-        			//characterImage.css("transform", "scaleX(-1)");
-        			//grid.css("transform", "scaleX(-1)");
         			characterImage.css("transform", "scaleX(-1)");
-        			
         		};
-        		
-        		/*
-       	      if (jump) {
-       	          h -= v;
-       	          t += 0.01;
-       	          v -= t;
-       	          if (h >= 0) {
-       	            h = 0;
-       	            jump = false;
-       	            is_jump = 0;
-       	          }
-       	        }
-        		*/
-        		
+     		
         		let top_base = sin * 8;
         		
         		if(character_data.find("is_jump").text() == "1") {
-        			//characterImage.css("transform", "scaleX(-1)");
-        			
-        			/*
-        			if (h == 0) {
-        				//v = V;
-        				v = 16;
-        				h -= v;
-        			} else if (h > 0){
-        				h -= v;
-        				v -= hundrend_from_one_second;
-        			} else {
-        				h = 0;
-        			}
-        			*/
         			if (h == 0 && v < V) {
         				v = V;
         				h -= v;
@@ -662,128 +480,40 @@
         			}
         			
         			top_base += h;
-        			
-        			
-        			
-        			//console.log("h: " + h);
-        			//console.log("v: " + v);
-        			//console.log("hundrend_from_one_second: " + hundrend_from_one_second);
-        			
         		};
         		
-        		
-        		
-        		
-        		
         		if (character_data.find("from_where").text() != character_data.find("tile_number").text()) {
-        			//let grid1 = $(".grid" + character_data.find("from_where").text());
         			let grid2 = $(".grid" + character_data.find("tile_number").text());
         			let chat_text_here = character_data.find("chat_text").text();
         			
-        			/*
-            		//let grid = $(".grid" + character_data.find("tile_number").text());
-                    //let grid = $(".grid" + character_data.find("from_where").text());
-                    if (grid.css("background") == "none") {
-                        //grid.css("background", "blue");
-                        grid.css("background", "red");
-                    }
-                   	$('<img class="otherCharacter" src="" />').appendTo(grid)
-                   		.attr("src", $("#characterBox>img").attr("src"))
-                   		.css("position", "absolute")
-                   		.css("left", "0px")
-                   		.css("top", sin * 8 + "px");
-                   	//let chat_text_here = character_data.find("chat_text").text();
-    				if (chat_text_here != "null") {
-                       	$('<p class="otherChat"></p>').appendTo(grid)
-                   		.css("color", "white")
-                   		.css("position", "absolute")
-                   		.css("left", "0px")
-                   		.css("top", sin * 8 + "px")
-                   		.text(chat_text_here);                        		
-                    }; 
-                    
-                    //let grid2 = $(".grid" + character_data.find("tile_number").text());
-                    //let grid2 = $(".grid" + character_data.find("from_where").text());
-                    if (grid2.css("background") == "none") {
-                    	grid2.css("background", "blue");
-                        //grid.css("background", "red");
-                    }
-                   	$('<img class="otherCharacter" src="" />').appendTo(grid2)
-                   		.attr("src", $("#characterBox>img").attr("src"))
-                   		.css("position", "absolute")
-                   		.css("left", "0px")
-                   		.css("top", sin * 8 + "px");
-                   	//let chat_text_here = character_data.find("chat_text").text();
-    				if (chat_text_here != "null") {
-                       	$('<p class="otherChat"></p>').appendTo(grid2)
-                   		.css("color", "white")
-                   		.css("position", "absolute")
-                   		.css("left", "0px")
-                   		.css("top", sin * 8 + "px")
-                   		.text(chat_text_here);                        		
-                    };
-                    */
-                    
-                    
-                    //console.log(grid.position());
                     let position1 = grid.position();
                     let position2 = grid2.position();
-                    //console.log(position1.left - position2.left);
-                    //console.log(position1.top - position2.top);
                     
-                    //let left_dif = position1.left - position2.left
-                    //let top_dif = position1.top - position2.top
                     let left_dif = position2.left - position1.left
                     let top_dif = position2.top - position1.top
                     
-                    
-                   
-                    //let grid3 = $(".grid" + character_data.find("tile_number").text());
-                    //let grid3 = $(".grid" + character_data.find("from_where").text());
                     if (grid.css("background") == "none") {
-                    	//grid3.css("background", "blue");
                     	grid.css("background", "yellow");
-                        //grid.css("background", "red");
                     }
-                   	//$('<img class="otherCharacter" src="" />').appendTo(grid)
                    	characterImage.appendTo(grid)
-                   		//.attr("src", $("#characterBox>img").attr("src"))
                    		.css("position", "absolute")
-                   		//.css("left", "0px")
-                   		//.css("left", "10px")
                    		.css("left", left_dif * hundrend_from_one_second + "px")
-                   		//.css("top", sin * 8 + "px");
-                   		//.css("top", sin * 8 + top_dif * hundrend_from_one_second + "px");
-                   		//.css("top", sin * 8 + top_dif * hundrend_from_one_second + h + "px");
                    		.css("top", top_base + top_dif * hundrend_from_one_second + "px");
-                   	//let chat_text_here = character_data.find("chat_text").text();
     				if (chat_text_here != "null") {
                        	$('<p class="otherChat"></p>').appendTo(grid)
                    		.css("color", "white")
                    		.css("position", "absolute")
-                   		//.css("left", "0px")
-                   		//.css("top", sin * 8 + "px")
                    		.css("left", left_dif * hundrend_from_one_second + "px")
-                   		//.css("top", sin * 8 + top_dif * hundrend_from_one_second + "px")
-                   		//.css("top", sin * 8 + top_dif * hundrend_from_one_second + h + "px")
                    		.css("top", top_base + top_dif * hundrend_from_one_second + "px")
                    		.text(chat_text_here);                        		
                     }; 
-        			
         		} else {
-        			
-                    //let grid = $(".grid" + character_data.find("from_where").text());
                     if (grid.css("background") == "none") {
                         grid.css("background", "blue");
-                        //grid.css("background", "red");
                     }
-                   	//$('<img class="otherCharacter" src="" />').appendTo(grid)
                    	characterImage.appendTo(grid)
-                   		//.attr("src", $("#characterBox>img").attr("src"))
                    		.css("position", "absolute")
                    		.css("left", "0px")
-                   		//.css("top", sin * 8 + "px");
-                   		//.css("top", sin * 8 + h + "px");
                    		.css("top", top_base + "px");
                    	let chat_text_here = character_data.find("chat_text").text();
     				if (chat_text_here != "null") {
@@ -791,26 +521,14 @@
                    		.css("color", "white")
                    		.css("position", "absolute")
                    		.css("left", "0px")
-                   		//.css("top", sin * 8 + "px")
-                   		//.css("top", sin * 8 + h + "px")
                    		.css("top", top_base + "px")
                    		.text(chat_text_here);                        		
                     };         			
         		}
-        		
-               
-                
         	};
         });    	
     	
-    	
     	if (hundrend_from_one_second >= 1.0) {
-    		
-    		
-    		
-    		
-    		
-    		
         	$.ajax({
                 type: "post",
                 url: "jk.controller.GameController",
@@ -831,12 +549,10 @@
     	        	is_chaton: is_chaton,
     	        	chat_text: chat_text,
     	        	is_jump: is_jump   
-                    
                 },
                 async: false,
                 success: function (resultData) {
                     console.log("s");
-                    //console.log(resultData);
                     data = resultData;
                     
                     $(".otherCharacter").parent().css("background", "none");
@@ -845,10 +561,8 @@
                     
                     $(resultData).find("character").each(function () {
                     	let character_data = $(this);
-                    	//if (member_id == $(this).find("member_id").text()) {
                     	if (member_id == character_data.find("member_id").text()) {
                     		console.log(member_id);
-                    		
                     		
                             $.ajax({
                                 type: "post",
@@ -864,12 +578,7 @@
                     	        	map_number: map_number,
                     	        	tile_number: tile_number,
                     	        	is_moving: is_moving,
-                    	        	//from_where: from_where,
-                    	        	//from_where: 19,
-                    	        	//from_where: tile_number,
                     	        	from_where: character_data.find("tile_number").text(),
-                    	        	//from_where: parseInt(character_data.find("tile_number").text()),
-                    	        	//from_where: $(this).find("tile_number").text(),
                     	        	is_flip: is_flip,
                     	        	is_chaton: is_chaton,
                     	        	chat_text: chat_text,
@@ -889,7 +598,6 @@
                             }
                             
                            	$('<img class="otherCharacter" src="" />').appendTo(grid)
-                           		//.attr("src", $("#characterBox>img").attr("src"))
                            		.css("position", "absolute")
                            		.css("left", "0px")
                            		.css("top", sin * 8 + "px");
@@ -897,7 +605,6 @@
                            	
     						if (chat_text_here != "null") {
                                	$('<p class="otherChat"></p>').appendTo(grid)
-                           		//.attr("src", $("#characterBox>img").attr("src"))
                            		.css("color", "white")
                            		.css("position", "absolute")
                            		.css("left", "0px")
@@ -911,61 +618,15 @@
                     console.log("e");
                 }
             });
-			/*
-            console.log(userId);
-        	
-            console.log("------------------");
-            console.log("member_id: " + member_id);
-            console.log("timestamp_latest: " + timestamp_latest);
-            console.log("timestamp_first: " + timestamp_first);
-            console.log("member_name: " + member_name);
-            console.log("model_number: " + model_number);
-            console.log("map_number: " + map_number);
-            console.log("tile_number: " + tile_number);
-            console.log("is_moving: " + is_moving);
-            console.log("from_where: " + from_where);
-            console.log("is_flip: " + is_flip);
-            console.log("is_chaton: " + is_chaton);
-            console.log("chat_text: " + chat_text);
-            console.log("is_jump: " + is_jump);    		
-    		*/
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-    		
     		
     		hundrend_from_one_second -= 1.0;
     	} else {
-            //console.log(Math.floor(hundrend_from_one_second * 1000) % 20);
-            //console.log(Math.floor(hundrend_from_one_second * 100));
-            //console.log(Math.floor(hundrend_from_one_second * 100) % 20);
-            //console.log(hundrend_from_one_second * 100);
-            
-            /*
-            if (Math.floor(hundrend_from_one_second * 100) % 20 == 0) {
-            	
-            	
-            	//console.log("image");
-            	
-            }
-            */
-    		
     		hundrend_from_one_second += 0.01;
     	}
-        
-        //console.log(hundrend_from_one_second);
     }, 10);
     
     setInterval(function() {
-        //$(".otherCharacter").attr("src", $("#characterBox>img").attr("src"));
     }, 200);
   });
 </script>
-
-
 </html>
