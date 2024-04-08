@@ -23,7 +23,6 @@ public class BoardListCommand implements Command {
 		String userId = (String)session.getAttribute("userId");
 		request.setAttribute("userId", userId);
 		
-		System.out.println("보드 사이즈" + list.size());
 
 		return "/board_main.jsp";
 	}
